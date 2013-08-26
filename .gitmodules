@@ -1,9 +1,6 @@
-[submodule "CodeMirror"]
-	path = CodeMirror
-	url = https://github.com/marijnh/CodeMirror.git
-[submodule "lib/CodeMirror"]
-	path = lib/CodeMirror
-	url = https://github.com/marijnh/CodeMirror.git
-[submodule "lib/ace"]
-	path = lib/ace
+[submodule "app/lib/ace"]
+	path = app/lib/ace
 	url = https://github.com/ajaxorg/ace.git
+[submodule "app/lib/CodeMirror"]
+	path = app/lib/CodeMirror
+	url = https://github.com/marijnh/CodeMirror.git
