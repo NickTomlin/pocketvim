@@ -16,7 +16,7 @@
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
-    "vim.js",
+    "codemirror.js",
     "lib/CodeMirror/keymap/vim.js"
   ]
 }
