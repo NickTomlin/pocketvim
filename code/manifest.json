@@ -1,8 +1,8 @@
 {
-  "name": "Chrome Extension Skeleton",
+  "name": "Pocket Vim",
   "version": "0.1.0",
   "manifest_version": 2,
-  "description": "Skeleton with basic libraries to use as a basis for Chrome extensions",
+  "description": "This extension Enables vim-mode on sites like Github Gists, JS Bin, CodePen and others",
   "icons": {
     "128": "images/icon.png"
   },
@@ -15,7 +15,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+       "matches": ["http://jsbin.com/*", "http://cssdeck.com/*", "http://codepen.io/pen/*"],
       "js": [
         "js/lib/require.js",
         "js/lib/jquery.js",
