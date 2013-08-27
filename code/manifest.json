@@ -7,22 +7,21 @@
     "128": "images/icon.png"
   },
   "browser_action": {
-    "default_icon": "images/icon.png",
-    "default_popup": "html/popup.html"
+    "default_icon": "images/icon.png"
+    // "default_popup": "html/popup.html"
   },
   "background": {
-    "page": "html/background.html"
+    // "page": "html/background.html"
   },
   "content_scripts": [
     {
-       "matches": ["http://jsbin.com/*", "http://cssdeck.com/*", "http://codepen.io/pen/*"],
+      "matches": ["http://jsbin.com/*", "http://cssdeck.com/*", "http://codepen.io/pen/*"],
       "js": [
         "js/lib/require.js",
-        "js/lib/jquery.js",
         "js/lib/underscore.js",
         "js/requireContent.js",
         "js/requireConfig.js",
-        "js/content.js"
+        "js/vimloader.js"
       ]
     }
   ],
