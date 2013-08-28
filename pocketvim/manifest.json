@@ -1,10 +1,10 @@
 {
   "name": "Pocket Vim",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "manifest_version": 2,
   "description": "This extension Enables vim-mode on sites like Github Gists, JS Bin, CodePen and others",
   "icons": {
-    "128": "images/icon.png"
+    "64": "images/icon.png"
   },
   "browser_action": {
     "default_icon": "images/icon.png"
@@ -15,7 +15,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://jsbin.com/*", "http://cssdeck.com/*", "http://codepen.io/pen/*"],
+      "matches": ["*://jsbin.com/*", "*://cssdeck.com/labs/*", "*://codepen.io/pen/*", "*://gist.github.com/*", "*://jsfiddle.net/*"],
       "js": [
         "js/lib/require.js",
         "js/lib/underscore.js",
