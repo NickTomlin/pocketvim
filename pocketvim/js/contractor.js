@@ -1,23 +1,13 @@
 requirejs.config(requirejsConfig);
-requirejs(['lib/underscore', 'config', 'util/crxload', 'editor'],
-  function(_,  config, crxload, Editor) {
+requirejs(['lib/underscore', 'config', 'util/crxload'],
+  function(_,  config, crxload) {
     var currentDomain = window.location.host;
 
-    // this should be a mapping to "domains"
-    // var editor = typeof config.domains[currentDomain] != 'undefined' ? config.domains[currentDomain] : config.defaultEditor; // defaults to codemirror
-
-    // this should construct an editor using "editors"
-    var editors = {
-      "codemirror": function () {
-        crxload('js/keybindings/codemirror/vim.js', function () {
-          crxload('js/modules/codemirror/codemirror.js', function () {
-            this.parentNode.removeChild(this);
-          });
-        });
-      },
-      "ace": function () {
-        crxload('js/modules/ace/ace.js');
-      }
-    };
-    editors[editor]();
+    // perhaps we could embed a simple script to check for 'ace' or 'codemirror' on window?
+    var editor = typeof config.domains[currentDomain] != 'undefined' ? config.domains[currentDomain] : config.defaultEditor; // defaults to codemirror
+    require(['codemirror/edit'], function (editor){
+      editor.loadDependencies(function(){
+        console.log('deps loaded');
+      });
+    });
 });

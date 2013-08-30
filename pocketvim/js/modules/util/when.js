@@ -7,18 +7,21 @@ define(['util/crxload'], function (crxload){
  * @return {[type]}                [description]
  */
   return function (dependencies, callback, timeout) {
+    // how to handle timeout?
     var loaded = [], timeout = timeout || 5000, elapsed = 0;
-    return function load () {
+    console.log(dependencies);
+
+    function load (dep) {
       if (loaded.length === dependencies.length) {
-        callback();
+        return callback();
       }
-      // this is not going to work
-      dependencies.forEach(function(dep){
-        crxload(dep, function () {
-          loaded.push(dep);
-          load();
-        })
-      })
-    }
-  };
+      crxload(dep, function () {
+        loaded.push(dep);
+      });
+    } // load
+
+    dependencies.forEach(function(dep){
+      load(dep);
+    });
+  }
 })

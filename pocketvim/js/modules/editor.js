@@ -6,8 +6,9 @@ define(['util/makeclass', 'util/when'], function (makeClass, when){
   Editor = makeClass();
 
   Editor.prototype.init = function (dependencies, options) {
+    // full path from chrome module root, NOT rjs path
     this.dependencies = dependencies;
-    this.options = callback || null;
+    this.options = options || {};
   };
 
 
@@ -17,14 +18,13 @@ define(['util/makeclass', 'util/when'], function (makeClass, when){
    */
   Editor.prototype.loadDependencies = function (callback) {
     var self = this;
-    when(this.dependencies, function () {
-      console.log('deps loaded');
-      callback();
-    });
+    console.log('loading dependencies');
+    when(this.dependencies, callback);
   };
 
   Editor.prototype.set = function () {};
 
   Editor.prototype.get = function () {};
 
+  return Editor;
 });
