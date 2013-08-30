@@ -1,10 +1,12 @@
 requirejs.config(requirejsConfig);
-requirejs(['lib/underscore', 'config', 'util/crxload'],
-  function(_,  config, crxload) {
-    var domain = window.location.host;
+requirejs(['lib/underscore', 'config', 'util/crxload', 'editor'],
+  function(_,  config, crxload, Editor) {
+    var currentDomain = window.location.host;
 
-    var editor = typeof config.domains[domain] != 'undefined' ? config.domains[domain] : config.defaultEditor; // defaults to codemirror
+    // this should be a mapping to "domains"
+    // var editor = typeof config.domains[currentDomain] != 'undefined' ? config.domains[currentDomain] : config.defaultEditor; // defaults to codemirror
 
+    // this should construct an editor using "editors"
     var editors = {
       "codemirror": function () {
         crxload('js/keybindings/codemirror/vim.js', function () {

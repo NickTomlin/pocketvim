@@ -15,13 +15,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://jsbin.com/*", "*://cssdeck.com/labs/*", "*://codepen.io/pen/*", "*://gist.github.com/*", "*://jsfiddle.net/*"],
+      "matches": ["*://jsbin.com/*", "*://cssdeck.com/labs/*", "*://codepen.io/pen/*", "*://gist.github.com/*", "*://jsfiddle.net/*", "*://plnkr.co/edit/*"],
       "js": [
         "js/lib/require.js",
         "js/lib/underscore.js",
         "js/requireContent.js",
         "js/requireConfig.js",
-        "js/vimloader.js"
+        "js/contractor.js"
       ]
     }
   ],
