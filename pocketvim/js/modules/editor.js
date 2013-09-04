@@ -1,4 +1,4 @@
-define(['util/makeclass', 'util/crxload'], function (makeClass, crxload){
+define(['util/makeclass', 'util/crxload', 'underscore'], function (makeClass, crxload, _){
   /**
    * Provide an "orderly" load of dependencies
    * @param  {array} sources array of extension root relative js files
@@ -20,10 +20,13 @@ define(['util/makeclass', 'util/crxload'], function (makeClass, crxload){
    */
   Editor = makeClass();
 
-  Editor.prototype.init = function (dependencies, options) {
-    // full path from chrome module root, NOT rjs path
-    this.dependencies = dependencies;
-    this.options = options || {};
+  Editor.prototype.init = function (options) {
+    this.defaults = {
+      dependencies: [],
+      editor: 'modules/codemirror/embed.js',
+      binding: 'js/keybindings/codemirror/vim.js'
+    };
+    this.options = _.extend({}, this.defaults, options);
   };
 
 
@@ -31,10 +34,9 @@ define(['util/makeclass', 'util/crxload'], function (makeClass, crxload){
    * Grab necessary files and load to DOM
    * @return {[type]} [description]
    */
-  Editor.prototype.loadDependencies = function (callback) {
-    var self = this;
-    console.log('loading dependencies');
-    load(this.dependencies);
+  Editor.prototype.loadDependencies = function () {
+    var combinedDependencies = options.dependencies.concat(options.binding, options.editor);
+    load(combinedDependencies);
   };
 
   Editor.prototype.set = function () {};

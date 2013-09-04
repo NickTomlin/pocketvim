@@ -28,7 +28,7 @@ requirejs(['lib/underscore', 'config', 'util/crxload'],
           // this needs to be a constructed path
           require(['editor'], function (Editor){
             var dependencies = ['js/keybindings/codemirror/vim.js', 'js/modules/codemirror/embed.js'];
-            cm = new Editor(dependencies, {version: editor.version });
+            cm = new Editor({editor: 'js/modules/codemirror/embed.js', version: editor.version });
             cm.loadDependencies();
           });
         }
