@@ -4,5 +4,10 @@ var requirejsConfig = {
   // Optionally specify different paths for specific modules
   paths: {
     lib: '/js/lib'
+  },
+  shim: {
+    'lib/underscore': {
+      exports: '_'
+    }
   }
 };

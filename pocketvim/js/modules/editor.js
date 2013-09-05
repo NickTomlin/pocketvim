@@ -1,4 +1,4 @@
-define(['util/makeclass', 'util/crxload', 'underscore'], function (makeClass, crxload, _){
+define(['util/crxload', 'lib/underscore'], function (crxload, _){
   /**
    * Provide an "orderly" load of dependencies
    * @param  {array} sources array of extension root relative js files
@@ -18,15 +18,16 @@ define(['util/makeclass', 'util/crxload', 'underscore'], function (makeClass, cr
    * A small configurable class to normalize interaction with dom-based editor
    * @parameters {array} dependencies list of modules that editor depends on (usually keybinding and embedded code)
    */
-  Editor = makeClass();
+  // Editor = makeClass();
 
-  Editor.prototype.init = function (options) {
+  function Editor (options) {
     this.defaults = {
       dependencies: [],
-      editor: 'modules/codemirror/embed.js',
+      editor: 'js/modules/codemirror/embed.js',
       binding: 'js/keybindings/codemirror/vim.js'
     };
-    this.options = _.extend({}, this.defaults, options);
+    // can use _.defaults() here as well...
+    this.options = _.defaults(options, this.defaults);
   };
 
 
@@ -35,9 +36,16 @@ define(['util/makeclass', 'util/crxload', 'underscore'], function (makeClass, cr
    * @return {[type]} [description]
    */
   Editor.prototype.loadDependencies = function () {
-    var combinedDependencies = options.dependencies.concat(options.binding, options.editor);
-    load(combinedDependencies);
+    load(this.getDependencies());
   };
+
+  /**
+   * Returns an array of dependencies. Order matters.
+   * @return {array}
+   */
+  Editor.prototype.getDependencies = function () {
+    return this.options.dependencies.concat(this.options.binding, this.options.editor);
+  }
 
   Editor.prototype.set = function () {};
 

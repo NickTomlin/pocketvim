@@ -1,4 +1,5 @@
 require.load = function (context, moduleName, url) {
+  console.log(url);
   var xhr;
   xhr = new XMLHttpRequest();
   xhr.open("GET", chrome.extension.getURL(url) + '?r=' + new Date().getTime(), true);

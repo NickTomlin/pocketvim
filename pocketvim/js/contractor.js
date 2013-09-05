@@ -3,17 +3,6 @@ requirejs(['lib/underscore', 'config', 'util/crxload'],
   function(_,  config, crxload) {
   var currentDomain = window.location.host;
 
-  function loadEditor (editorName) {
-    require(['codemirror/edit'], function (editor){
-      editor.loadDependencies(function(){
-        console.log('deps loaded');
-      });
-    });
-  }
-
-  // perhaps we could embed a simple script to check for 'ace' or 'codemirror' on window?
-  // var editor = typeof config.domains[currentDomain] != 'undefined' ? config.domains[currentDomain] : config.defaultEditor; // defaults to codemirror
-
   // check for existence of editor (and ideally editor version)
   // https://developer.chrome.com/extensions/content_scripts.html#host-page-communication
   window.addEventListener("message", function(event) {
@@ -22,18 +11,17 @@ requirejs(['lib/underscore', 'config', 'util/crxload'],
         return;
 
       if (event.data.type && (event.data.type == "DOMSPY")) {
-        var editor = JSON.parse(event.data.text);
+        // {}
+        var pageData = JSON.parse(event.data.text);
 
-        if (editor.name) {
-          // this needs to be a constructed path
-          require(['editor'], function (Editor){
-            var dependencies = ['js/keybindings/codemirror/vim.js', 'js/modules/codemirror/embed.js'];
-            cm = new Editor({editor: 'js/modules/codemirror/embed.js', version: editor.version });
-            cm.loadDependencies();
+        if (pageData.name) {
+          var name = pageData.name.toLowerCase();
+          require([ name + '/' + 'edit' ], function (Editor){
+            editor = new Editor(pageData);
+            editor.loadDependencies();
           });
         }
       }
-
   }, false);
 
   // kick things off
