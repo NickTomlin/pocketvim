@@ -6,12 +6,23 @@ define(['util/crxload', 'lib/underscore'], function (crxload, _){
    */
   function load (sources, current) {
     current = typeof current === 'undefined' ? 0 : current;
-    if (current === sources.length) {
+    if (current >= sources.length) {
       return;
     }
-    crxload(sources[current], function () {
+
+    function next () {
       load(sources, current + 1);
-    });
+    }
+
+    if ( _.isString(sources[current]) ) {
+      crxload(sources[current], function () {
+        next();
+      });
+    } else {
+      // keep crazy train rolling if sources[current] is undefined, null, or empty
+      console.log('null!');
+      next();
+    }
   }
 
   /**
@@ -23,8 +34,8 @@ define(['util/crxload', 'lib/underscore'], function (crxload, _){
   function Editor (options) {
     this.defaults = {
       dependencies: [],
-      editor: 'js/modules/codemirror/embed.js',
-      binding: 'js/keybindings/codemirror/vim.js'
+      embed: 'js/modules/codemirror/embed.js',
+      binding: 'js/keybindings/codemirror/legacyvim.js'
     };
     // can use _.defaults() here as well...
     this.options = _.defaults(options, this.defaults);
@@ -44,8 +55,8 @@ define(['util/crxload', 'lib/underscore'], function (crxload, _){
    * @return {array}
    */
   Editor.prototype.getDependencies = function () {
-    return this.options.dependencies.concat(this.options.binding, this.options.editor);
-  }
+    return this.options.dependencies.concat(this.options.binding, this.options.embed);
+  };
 
   Editor.prototype.set = function () {};
 

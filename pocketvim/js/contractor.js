@@ -18,6 +18,7 @@ requirejs(['lib/underscore', 'config', 'util/crxload'],
           var name = pageData.name.toLowerCase();
           require([ name + '/' + 'edit' ], function (Editor){
             editor = new Editor(pageData);
+            console.dir(editor);
             editor.loadDependencies();
           });
         }
