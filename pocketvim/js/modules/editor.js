@@ -32,15 +32,8 @@ define(['util/crxload', 'lib/underscore'], function (crxload, _){
   // Editor = makeClass();
 
   function Editor (options) {
-    this.defaults = {
-      dependencies: [],
-      embed: 'js/modules/codemirror/embed.js',
-      binding: 'js/keybindings/codemirror/legacyvim.js'
-    };
-    // can use _.defaults() here as well...
-    this.options = _.defaults(options, this.defaults);
+    this.options = options || {};
   };
-
 
   /**
    * Grab necessary files and load to DOM
