@@ -7,9 +7,10 @@ define(['lib/underscore', 'util/crxload', 'editor'], function (_, crxLoad, Edito
     CodeMirror.prototype = new Editor();
 
     CodeMirror.prototype.getDependencies = function () {
-      // this is performing loose compare since version is typically a string. Not sure if that is super taboo
+      // legacy code mirror instances use a different method of toggling between insert mode (https://groups.google.com/d/msg/codemirror/l58GjS3nqnY/_TtFnOcXtbAJ)
+      // we need to check for a version to get the appropriate binding
       var binding = this.options.version && this.options.version < 3.15 ? 'js/keybindings/codemirror/legacyvim.js' : 'js/keybindings/codemirror/vim.js';
-      return [binding,'js/modules/codemirror/embed.js']
+      return [binding,'js/modules/codemirror/embed.js'];
     }
   return CodeMirror;
 });
