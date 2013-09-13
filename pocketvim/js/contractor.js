@@ -11,7 +11,6 @@ requirejs(['lib/underscore', 'config', 'util/crxload'],
         return;
 
       if (event.data.type && (event.data.type == "DOMSPY")) {
-        // {}
         var pageData = JSON.parse(event.data.text);
 
         if (pageData.name) {

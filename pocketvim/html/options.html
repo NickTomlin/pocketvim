@@ -1,0 +1,31 @@
+<html>
+<head><title>My Test Extension Options</title></head>
+<style>
+      body {
+        font: 14px "DejaVu Sans", "Arial", sans-serif;
+        color: #303942;
+        width: 680px;
+        margin: 0 auto;
+      }
+      a, a:visited { color: #15c; }
+      a:active { color: #052577; }
+      div#wrapper { width: 500px; }
+</style>
+<body>
+Favorite Color:
+<select name="favorite_color" id="color">
+ <option value="red">red</option>
+ <option value="green">green</option>
+ <option value="blue">blue</option>
+ <option value="yellow">yellow</option>
+</select>
+<br>
+<h2>Enabled Urls:</h2>
+<p>(One per line please)</p>
+<textarea name="included_urls" id="included_urls" cols="30" rows="10"></textarea>
+<div id="status"></div>
+<button id="save">Save</button>
+</body>
+<script src="../js/options.js"></script>
+
+</html>

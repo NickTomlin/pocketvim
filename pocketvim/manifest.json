@@ -7,15 +7,16 @@
     "64": "images/icon.png"
   },
   "browser_action": {
-    "default_icon": "images/icon.png"
-    // "default_popup": "html/popup.html"
+    "default_icon": "images/icon.png",
+    "default_popup": "html/popup.html"
   },
   "background": {
-    // "page": "html/background.html"
+    "scripts": ["js/settings.js"]
   },
+  "options_page": "html/options.html",
   "content_scripts": [
     {
-      "matches": ["*://jsbin.com/*", "*://cssdeck.com/labs/*", "*://codepen.io/pen/*", "*://gist.github.com/*", "*://jsfiddle.net/*", "*://plnkr.co/edit/*"],
+      "matches": ["<all_urls>"],
       "js": [
         "js/lib/require.js",
         "js/lib/underscore.js",
@@ -26,6 +27,7 @@
     }
   ],
   "permissions": [
+      "background"
   ],
   "web_accessible_resources": [
     "js/*",
