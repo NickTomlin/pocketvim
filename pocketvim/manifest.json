@@ -14,20 +14,18 @@
     "scripts": ["js/main.js"]
   },
   "options_page": "html/options.html",
-  // "content_scripts": [
-  //   {
-  //     "matches": ["<all_urls>"],
-  //     "js": [
-  //       "js/lib/require.js",
-  //       "js/lib/underscore.js",
-  //       "js/requireContent.js",
-  //       "js/requireConfig.js",
-  //       "js/contractor.js"
-  //     ]
-  //   }
-  // ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "js/contractor.js"
+      ]
+    }
+  ],
   "permissions": [
-    "background"
+    "http://*/*", "https://*/*",
+    "background",
+    "tabs"
   ],
   "web_accessible_resources": [
     "js/*",

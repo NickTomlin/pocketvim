@@ -1,7 +1,10 @@
 'use strict';
-// Saves options to localStorage.
-var settings = ['favorite_color', 'enabled_urls'];
 
+// Saves options to localStorage.
+var options = chrome.extension.getBackgroundPage().options;
+
+// our option inputs
+var settingInputs = ['enabled_urls'];
 
 function getInput (name) {
   return document.querySelector('[name="'+ name + '"]');
@@ -19,15 +22,16 @@ function getInputValue(ele) {
     'textarea': function () {
       return this.value; // we are just storing things as whole lines
     }
-  }
+  };
   return inputs[name].call(ele);
 }
 
 
 function save_options() {
-  for (var i = 0; i < settings.length; i++) {
-    var name = settings[i];
-    localStorage[name] = getInputValue(getInput(name));
+  for (var i = 0; i < settingInputs.length; i++) {
+    var inputName = settingInputs[i];
+    var input = getInput(inputName);
+    options(inputName, getInputValue(input));
   };
   // Update status to let user know options were saved.
   var status = document.getElementById('status');
@@ -39,9 +43,9 @@ function save_options() {
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
-  for (var i = 0; i < settings.length; i++) {
-    var key = settings[i];
-    var value = localStorage[key];
+  for (var i = 0; i < settingInputs.length; i++) {
+    var key = settingInputs[i];
+    var value = options(key);
 
     if (!value) {
      continue;
