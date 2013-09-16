@@ -11,23 +11,23 @@
     "default_popup": "html/popup.html"
   },
   "background": {
-    "scripts": ["js/settings.js"]
+    "scripts": ["js/main.js"]
   },
   "options_page": "html/options.html",
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": [
-        "js/lib/require.js",
-        "js/lib/underscore.js",
-        "js/requireContent.js",
-        "js/requireConfig.js",
-        "js/contractor.js"
-      ]
-    }
-  ],
+  // "content_scripts": [
+  //   {
+  //     "matches": ["<all_urls>"],
+  //     "js": [
+  //       "js/lib/require.js",
+  //       "js/lib/underscore.js",
+  //       "js/requireContent.js",
+  //       "js/requireConfig.js",
+  //       "js/contractor.js"
+  //     ]
+  //   }
+  // ],
   "permissions": [
-      "background"
+    "background"
   ],
   "web_accessible_resources": [
     "js/*",

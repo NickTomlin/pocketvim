@@ -1,3 +1,4 @@
+'use strict';
 requirejs.config(requirejsConfig);
 requirejs(['lib/underscore', 'config', 'util/crxload'],
   function(_,  config, crxload) {
@@ -5,12 +6,12 @@ requirejs(['lib/underscore', 'config', 'util/crxload'],
 
   // check for existence of editor (and ideally editor version)
   // https://developer.chrome.com/extensions/content_scripts.html#host-page-communication
-  window.addEventListener("message", function(event) {
+  window.addEventListener('message', function(event) {
       // We only accept messages from ourselves
       if (event.source != window)
         return;
 
-      if (event.data.type && (event.data.type == "DOMSPY")) {
+      if (event.data.type && (event.data.type == 'DOMSPY')) {
         var pageData = JSON.parse(event.data.text);
 
         if (pageData.name) {

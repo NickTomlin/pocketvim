@@ -1,8 +1,13 @@
 'use strict';
 // Saves options to localStorage.
-var settings = ['favorite_color', 'included_urls'];
+var settings = ['favorite_color', 'enabled_urls'];
 
-function getValue(ele) {
+
+function getInput (name) {
+  return document.querySelector('[name="'+ name + '"]');
+}
+
+function getInputValue(ele) {
   var name = ele.nodeName.toLowerCase();
   var inputs = {
     'select': function () {
@@ -18,14 +23,11 @@ function getValue(ele) {
   return inputs[name].call(ele);
 }
 
-function getInput (name) {
-  return document.querySelector('[name="'+ name + '"]');
-}
 
 function save_options() {
   for (var i = 0; i < settings.length; i++) {
     var name = settings[i];
-    localStorage[name] = getValue(getInput(name));
+    localStorage[name] = getInputValue(getInput(name));
   };
   // Update status to let user know options were saved.
   var status = document.getElementById('status');
