@@ -1,5 +1,4 @@
 define(['lib/underscore', 'util/crxload', 'editor'], function (_, crxLoad, Editor) {
-    console.log(typeof Editor);
     CodeMirror = function (){
         Editor.apply(this, arguments);
     }
