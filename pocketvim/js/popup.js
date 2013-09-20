@@ -6,6 +6,7 @@ function getCurrentUrl (callback) {
     lastFocusedWindow: true
   }, function (tabs) {
     var tab = tabs[0];
+    console.dir(tab);
     callback(tab.url);
   });
 };
@@ -13,7 +14,9 @@ function getCurrentUrl (callback) {
 document.addEventListener('DOMContentLoaded', function () {
   var input = document.querySelector('[name="current_url"]');
   getCurrentUrl(function (url) {
-    input.value = url;
+    // tab.url is equiavlent to window.location.href
+    var urlHost = url.split('/').slice(0,3).join('/') + '/*';
+    input.value = urlHost;
   });
 
   var submit = document.querySelector('button');

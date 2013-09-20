@@ -27,6 +27,7 @@ function getInputValue(ele) {
 }
 
 
+// @todo#cleanup run trim to remove empty strings?
 function save_options() {
   for (var i = 0; i < settingInputs.length; i++) {
     var inputName = settingInputs[i];

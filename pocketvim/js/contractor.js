@@ -1,5 +1,4 @@
 "use strict";
-var currentDomain = window.location.host;
 
 /* ==========================================================================
    Editor
@@ -109,8 +108,17 @@ function injectScript (url, callback) {
     (document.head||document.documentElement).appendChild(s);
 }
 
+/* ==========================================================================
+   Page Interaction
+   ========================================================================== */
+// see if our page is enabled
+
+var currentDomain = window.location.origin + window.location.pathname;
+console.log(currentDomain);
+debugger;
 chrome.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
     // we don't want to do anything if the domain is not enabled
+    debugger;
     if (!response) { console.log('not enabled'); return; }
 
     injectScript('/js/modules/util/domspy.js', function () {
@@ -119,6 +127,7 @@ chrome.extension.sendMessage({method: "isEnabled", url: currentDomain }, functio
     });
 });
 
+// interact with our injected script
 function attachListener () {
   window.addEventListener("message", function(event) {
       // We only accept messages from ourselves

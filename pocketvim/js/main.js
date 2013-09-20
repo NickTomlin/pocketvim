@@ -13,7 +13,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
   console.log('message from: %s', sender);
 
   if (publicApi[request.method]) {
-    sendResponse(publicApi[request.method](request, sender));
+    sendResponse(publicApi[request.method](request));
   }
   return false;
 });
@@ -76,17 +76,19 @@ var options = function () {
 
 // inspired / stolen from Vimium
 var isEnabled = function (request) {
-  url = request.url;
-
+  var url = request.url;
   enabledUrls = options("enabled_urls");
   var enabled = false;
 
   // handle wildcard in enabled urls
-  var urlRe = new RegExp('^' + url.replace(/\*/g,'.*') + "$");
-  enabledUrls.split('\n').forEach(function (enabledUrl) {
-    enabled = urlRe.test(url);
+  // use array.some so we can escape http://stackoverflow.com/a/2641374/1048479
+  // @todo#codingsmell is this too clever?
+  return enabledUrls.split('\n').some(function (enabledUrl) {
+    var urlRe = new RegExp('^' + enabledUrl.replace(/\*/g,'.*') + "$");
+    return urlRe.test(url);
   });
-  return enabled;
+
+
 };
 
 var publicApi = {
