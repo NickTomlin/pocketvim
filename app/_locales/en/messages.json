@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Pocketvim",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Enable vim bindings in sites like CCodepen, Github Gists, and more",
+    "description": "The description of the application"
+  }
+}

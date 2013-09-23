@@ -1,27 +1,32 @@
 {
-  "name": "pocket-vim",
+  "name": "pocketvim",
   "version": "0.0.0",
-  "description": "",
-  "main": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": "",
-  "author": "",
-  "license": "MIT",
-  "gitHead": "db1514bc9c9ce696d5b4c6fe783c2455c42d62b9",
+  "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-requirejs": "~0.4.1",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-stylus": "~0.5.0",
-    "grunt-contrib-connect": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-shell": "~0.3.1",
-    "grunt-shell-spawn": "~0.2.4",
-    "requirejs": "~2.1.8",
-    "grunt-contrib-jasmine": "~0.5.1"
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-compass": "~0.5.0",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-htmlmin": "~0.1.3",
+    "grunt-contrib-imagemin": "~0.2.0",
+    "grunt-contrib-compress": "~0.4.7",
+    "grunt-contrib-watch": "~0.5.2", 
+    "grunt-usemin": "~0.1.10", 
+    "grunt-mocha": "~0.3.0",
+    "grunt-open": "~0.2.0",
+    "grunt-svgmin": "~0.2.0",
+    "grunt-concurrent": "~0.3.0",
+    "load-grunt-tasks": "~0.1.0",
+    "grunt-chrome-manifest": "~0.1.0",
+    "time-grunt": "~0.1.1"
   },
-  "dependencies": {}
+  "engines": {
+    "node": ">=0.8.0"
+  }
 }
