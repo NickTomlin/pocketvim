@@ -1,4 +1,16 @@
+;(function (window, undefined) {
 "use strict";
+
+var Editors = {},
+Editor,
+// helpers
+load,
+injectScript,
+attachListener,
+// static
+currentDomain
+;
+
 /* ==========================================================================
    Helpers
    ========================================================================== */
@@ -8,7 +20,7 @@
  * @param  {string} url path to js file from extension root
  * @param  {function} callback  optional callback to be fired on script 'onload' event
  */
-function injectScript (url, callback) {
+injectScript = function (url, callback) {
     var s = document.createElement('script');
     s.src = chrome.extension.getURL(url);
     // @todo potentially remove parentNode here and then call callback?
@@ -19,62 +31,59 @@ function injectScript (url, callback) {
 /* ==========================================================================
    Editor
    ========================================================================== */
-  /**
-   * Provide an "orderly" load of dependencies
-   * @param  {array} sources array of extension root relative js files
-   * @param  {int} current current member of source arary (internal use only)
-   */
-  function load (sources, current) {
-    current = typeof current === 'undefined' ? 0 : current;
-    if (current >= sources.length) {
-      return;
-    }
-
-    function next () {
-      load(sources, current + 1);
-    }
-
-    if ( typeof sources[current] === 'undefined' || sources[current] === '' ) {
-      next();
-    } else {
-      crxload(sources[current], function () {
-        next();
-      });
-    }
+/**
+ * Provide an "orderly" load of dependencies
+ * @param  {array} sources array of extension root relative js files
+ * @param  {int} current current member of source arary (internal use only)
+ */
+load = function (sources, current) {
+  current = typeof current === 'undefined' ? 0 : current;
+  if (current >= sources.length) {
+    return;
   }
 
-  /**
-   * A small configurable class to normalize interaction with dom-based editor
-   * @parameters {array} dependencies list of modules that editor depends on (usually keybinding and embedded code)
-   */
-  // Editor = makeClass();
+  var next = function () {
+    load(sources, current + 1);
+  }
 
-  function Editor (options) {
-    this.options = options || {};
-  };
+  if ( typeof sources[current] === 'undefined' || sources[current] === '' ) {
+    next();
+  } else {
+    injectScript(sources[current], function () {
+      next();
+    });
+  }
+}
 
-  /**
-   * Grab necessary files and load to DOM
-   * @return {[type]} [description]
-   */
-  Editor.prototype.loadDependencies = function () {
-    load(this.getDependencies());
-  };
+/**
+ * A small configurable class to normalize interaction with dom-based editor
+ * @parameters {array} dependencies list of modules that editor depends on (usually keybinding and embedded code)
+ */
 
-  /**
-   * Returns an array of dependencies. Order matters.
-   * @return {array}
-   */
-  Editor.prototype.getDependencies = function () {
-    return this.options.dependencies.concat(this.options.binding, this.options.embed);
-  };
+Editor  = function (options) {
+  this.options = options || {};
+};
 
-  Editor.prototype.set = function () {};
+/**
+ * Grab necessary files and load to DOM
+ * @return {[type]} [description]
+ */
+Editor.prototype.loadDependencies = function () {
+  load(this.getDependencies());
+};
 
-  Editor.prototype.get = function () {};
+/**
+ * Returns an array of dependencies. Order matters.
+ * @return {array}
+ */
+Editor.prototype.getDependencies = function () {
+  return this.options.dependencies.concat(this.options.binding, this.options.embed);
+};
 
-  // Editors holds all editor prototypes
-  var Editors = {};
+Editor.prototype.set = function () {};
+
+Editor.prototype.get = function () {};
+
 
 /* ==========================================================================
    Ace
@@ -84,6 +93,7 @@ Editors.Ace = function (){
 }
 
 Editors.Ace.prototype = new Editor();
+
 Editors.Ace.prototype.getDependencies = function () {
   return ['js/modules/ace/embed.js'];
 }
@@ -110,20 +120,19 @@ Editors.CodeMirror.prototype.getDependencies = function () {
    ========================================================================== */
 // see if our page is enabled
 
-var currentDomain = window.location.origin + window.location.pathname;
-console.log(currentDomain);
+currentDomain = window.location.origin + window.location.pathname;
+
 chrome.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
     // we don't want to do anything if the domain is not enabled
-    if (!response) { console.log('not enabled'); return; }
+    if (!response) { return; }
 
-    injectScript('/js/modules/util/domspy.js', function () {
-      console.log('dom spy embedded');
+    injectScript('/js/modules/domspy.js', function () {
       attachListener();
     });
 });
 
 // interact with our injected script
-function attachListener () {
+attachListener = function () {
   window.addEventListener("message", function(event) {
       // We only accept messages from ourselves
       if (event.source != window)
@@ -131,9 +140,10 @@ function attachListener () {
 
       if (event.data.type && (event.data.type == "DOMSPY")) {
         var options = JSON.parse(event.data.editorOptions);
-        debugger;
         var editor = new Editors[event.data.editorName](options);
         editor.loadDependencies();
       }
   }, false);
 }
+
+}(window, undefined))
