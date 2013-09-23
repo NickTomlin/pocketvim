@@ -1,4 +1,34 @@
 "use strict";
+/* ==========================================================================
+   Helpers
+   ========================================================================== */
+/**
+ * Load "in-dom" js resources to get around
+ * Chrome's seperation of extension / page DOM.
+ * @param  {string} url path to js file from extension root
+ * @param  {function} callback  optional callback to be fired on script 'onload' event
+ */
+function injectScript (url, callback) {
+    var s = document.createElement('script');
+    s.src = chrome.extension.getURL(url);
+    // @todo potentially remove parentNode here and then call callback?
+    s.onload = callback;
+    (document.head||document.documentElement).appendChild(s);
+}
+
+/**
+* Load "in-dom" js resources to get around
+* Chrome's seperation of extension / page DOM.
+* @param  {string} url path to js file from extension root
+* @param  {function} callback  optional callback to be fired on script 'onload' event
+*/
+function crxload (url, callback) {
+  var s = document.createElement('script');
+  s.src = chrome.extension.getURL(url);
+  // @todo potentially remove parentNode here and then call callback?
+  s.onload = callback;
+  (document.head||document.documentElement).appendChild(s);
+}
 
 /* ==========================================================================
    Editor
@@ -18,14 +48,12 @@
       load(sources, current + 1);
     }
 
-    if ( _.isString(sources[current]) ) {
+    if ( typeof sources[current] === 'undefined' || sources[current] === '' ) {
+      next();
+    } else {
       crxload(sources[current], function () {
         next();
       });
-    } else {
-      // keep crazy train rolling if sources[current] is undefined, null, or empty
-      console.log('null!');
-      next();
     }
   }
 
@@ -92,33 +120,14 @@ Editors.CodeMirror.prototype.getDependencies = function () {
 }
 
 /* ==========================================================================
-   Helpers
-   ========================================================================== */
-/**
- * Load "in-dom" js resources to get around
- * Chrome's seperation of extension / page DOM.
- * @param  {string} url path to js file from extension root
- * @param  {function} callback  optional callback to be fired on script 'onload' event
- */
-function injectScript (url, callback) {
-    var s = document.createElement('script');
-    s.src = chrome.extension.getURL(url);
-    // @todo potentially remove parentNode here and then call callback?
-    s.onload = callback;
-    (document.head||document.documentElement).appendChild(s);
-}
-
-/* ==========================================================================
    Page Interaction
    ========================================================================== */
 // see if our page is enabled
 
 var currentDomain = window.location.origin + window.location.pathname;
 console.log(currentDomain);
-debugger;
 chrome.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
     // we don't want to do anything if the domain is not enabled
-    debugger;
     if (!response) { console.log('not enabled'); return; }
 
     injectScript('/js/modules/util/domspy.js', function () {
@@ -135,9 +144,10 @@ function attachListener () {
         return;
 
       if (event.data.type && (event.data.type == "DOMSPY")) {
-        var editor = new Editors[event.data.name];
+        var options = JSON.parse(event.data.editorOptions);
+        debugger;
+        var editor = new Editors[event.data.editorName](options);
         editor.loadDependencies();
       }
   }, false);
 }
-
