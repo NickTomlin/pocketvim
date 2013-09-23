@@ -18,7 +18,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "js/contractor.js"
+        "js/page.js"
       ]
     }
   ],
