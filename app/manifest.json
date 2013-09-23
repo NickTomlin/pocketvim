@@ -3,6 +3,7 @@
     "version": "0.0.3",
     "manifest_version": 2,
     "description": "This extension Enables vim-mode on sites like Github Gists, JS Bin, CodePen and others",
+    "default_locale": "en",
     "icons": {
         "64": "images/icon.png"
     },
