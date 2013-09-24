@@ -1,6 +1,6 @@
 {
     "name": "Pocket Vim",
-    "version": "0.0.3",
+    "version": "0.0.1",
     "manifest_version": 2,
     "description": "This extension Enables vim-mode on sites like Github Gists, JS Bin, CodePen and others",
     "default_locale": "en",
@@ -13,7 +13,7 @@
     },
     "background": {
         "scripts": [
-            "js/main.js"
+            "scripts/main.js"
         ]
     },
     "options_page": "html/options.html",
@@ -23,7 +23,7 @@
                 "<all_urls>"
             ],
             "js": [
-                "js/page.js"
+                "scripts/page.js"
             ]
         }
     ],
@@ -34,7 +34,7 @@
         "tabs"
     ],
     "web_accessible_resources": [
-        "js/*",
+        "scripts/*",
         "html/*",
         "css/*",
         "images/*"
