@@ -20,6 +20,13 @@ function getInputValue(ele) {
       return this.value;
     },
     'textarea': function () {
+      var cleanedValues = this.value
+                            .split('\n')
+                            .filter(function(value){
+                              return value !== ""
+                            })
+                            .join('\n') + '\n';
+      this.value = cleanedValues;
       return this.value; // we are just storing things as whole lines
     }
   };

@@ -1,4 +1,6 @@
 options = chrome.extension.getBackgroundPage().options;
+console.log('options:')
+console.log(options);
 
 function getCurrentUrl (callback) {
   chrome.tabs.query({
@@ -23,9 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
   submit.addEventListener('click', function () {
     // there is probably a more elegant way to do this...
     proposedUrl = input.value;
-    currentUrls = options('enabled_urls');
+    currentUrls = options('enabled_urls') || '';
+    console.log(currentUrls);
     if (currentUrls.indexOf(proposedUrl) === -1) {
-      options('enabled_urls', currentUrls + proposedUrl + '\n');
+      options('enabled_urls', currentUrls + proposedUrl + '\n' );
     }
   });
 
