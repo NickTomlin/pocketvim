@@ -1,4 +1,3 @@
-console.log('main js');
 /* Possibilities:
 =================================*/
 /*
@@ -10,8 +9,6 @@ console.log('main js');
 // our event bus
 // inspired by Vimium
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log('message from: %s', sender);
-
   if (publicApi[request.method]) {
     sendResponse(publicApi[request.method](request));
   }
@@ -51,8 +48,8 @@ var options = function () {
     var key = arguments[0];
     var value = arguments[1];
     // if (key === "enabled_urls") {
-    //   var url = arguments[1];
-    //   var value = localStorage["enabled_urls"] + url + "\n";
+    //   var urls = arguments[1];
+    //   var value = urls + "\n";
     // }
     localStorage[key] = value;
   };
