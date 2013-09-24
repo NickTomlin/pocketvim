@@ -29,14 +29,6 @@ module.exports = function (grunt) {
             options: {
                 spawn: false
             },
-            coffee: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-                tasks: ['coffee:dist']
-            },
-            coffeeTest: {
-                files: ['test/spec/{,*/}*.coffee'],
-                tasks: ['coffee:test']
-            },
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
@@ -90,26 +82,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        coffee: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/scripts',
-                    src: '{,*/}*.coffee',
-                    dest: '.tmp/scripts',
-                    ext: '.js'
-                }]
-            },
-            test: {
-                files: [{
-                    expand: true,
-                    cwd: 'test/spec',
-                    src: '{,*/}*.coffee',
-                    dest: '.tmp/spec',
-                    ext: '.js'
-                }]
-            }
-        },
         compass: {
             options: {
                 sassDir: '<%= yeoman.app %>/styles',
@@ -134,12 +106,19 @@ module.exports = function (grunt) {
         /*concat: {
             dist: {}
         },*/
+        // @todo fix this
         // not enabled since usemin task does concat and uglify
         // check index.html to edit your build targets
         // enable this task if you prefer defining your build targets here
-        /*uglify: {
-            dist: {}
-        },*/
+        // uglify: {
+        //     dist: {
+        //       files: [{
+        //         cwd: '<%= yeoman.app %>/scripts',
+        //         src: '**/*.js',
+        //         dest: '<%= yeoman.dist %>/scripts/'
+        //       }]
+        //     }
+        // },
         useminPrepare: {
             options: {
                 dest: '<%= yeoman.dist %>'
@@ -202,12 +181,14 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>',
-                    src: '*.html',
+                    src: 'html/*.html',
                     dest: '<%= yeoman.dist %>'
                 }]
             }
         },
         // Put files not handled in other tasks here
+        // @todo figure out what to do with JS (do we want to uglify etc?)
+        // -- Probably best to uglify + concat popup/main files. and then copy the rest.
         copy: {
             dist: {
                 files: [{
@@ -227,20 +208,22 @@ module.exports = function (grunt) {
                     src: [
                         'generated/*'
                     ]
+                }, {
+                  expand: true,
+                  cwd: '<%= yeoman.app %>/scripts',
+                  dest: '<%= yeoman.dist %>/scripts',
+                  src: ['**/*.js']
                 }]
             }
         },
         concurrent: {
             server: [
-                'coffee:dist',
                 'compass:server'
             ],
             test: [
-                'coffee',
                 'compass'
             ],
             dist: [
-                'coffee',
                 'compass:dist',
                 'imagemin',
                 'svgmin',
