@@ -1,10 +1,20 @@
-/* Possibilities:
-=================================*/
-/*
- 1. listen on tab change, and inject your content script based on url:
-    http://stackoverflow.com/a/9880794/1048479
- 2. Load a content script on all pages, have that communicate with background script.
- */
+var getCurrentTab,
+getCurrentUrl,
+options,
+isEnabled,
+publicApi,
+restoreDefaultOptions,
+defaults = {
+  enabled_urls : [
+   'http://jsbin.com/*',
+   'http://jsfiddle.net/*',
+   'http://codepen.io/pen',
+   'https://gist.github.com/*',
+   'http://gist.github.com/*',
+   'http://cssdeck.com/labs/*',
+   'http://dillinger.io/*'
+  ].join('\n'),
+};
 
 // our event bus
 // inspired by Vimium
@@ -17,7 +27,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 
 
 
-function getCurrentTab (callback) {
+getCurrentTab = function (callback) {
   chrome.tabs.query({
     active: true,
     lastFocusedWindow: true
@@ -27,7 +37,7 @@ function getCurrentTab (callback) {
   });
 };
 
-function getCurrentUrl(callback) {
+getCurrentUrl = function (callback) {
   getCurrentTab(function (tab) {
     return tab.url;
   });
@@ -38,19 +48,14 @@ function getCurrentUrl(callback) {
  * @return {[type]} [description]
  * @todo!2#security consider checking for OUR local storage keys to avoid hijacking.
  */
-var options = function () {
+options = function () {
   var get = function (key) {
-    if (localStorage[key])
-      return localStorage[key];
+    return localStorage[key];
   };
 
   var set = function () {
     var key = arguments[0];
     var value = arguments[1];
-    // if (key === "enabled_urls") {
-    //   var urls = arguments[1];
-    //   var value = urls + "\n";
-    // }
     localStorage[key] = value;
   };
 
@@ -63,6 +68,7 @@ var options = function () {
     }
     return allSettings;
   };
+
   // if no arguments are passed, return all settings
   if (arguments.length < 1) {
     return all();
@@ -71,8 +77,15 @@ var options = function () {
   return arguments.length === 1 ? get.apply(null, arguments) : set.apply(null, arguments);
 };
 
+options.restoreDefaultOptions = function () {
+  for (var prop in defaults) {
+    if (defaults.hasOwnProperty(prop))
+      options(prop, defaults[prop]);
+  }
+}
+
 // inspired / stolen from Vimium
-var isEnabled = function (request) {
+isEnabled = function (request) {
   var url = request.url;
   enabledUrls = options("enabled_urls");
   var enabled = false;
@@ -84,10 +97,14 @@ var isEnabled = function (request) {
     var urlRe = new RegExp('^' + enabledUrl.replace(/\*/g,'.*') + "$");
     return urlRe.test(url);
   });
-
-
 };
 
-var publicApi = {
+publicApi = {
   isEnabled: isEnabled,
+}
+
+// set defaults (hopefully only once ;)
+if (! localStorage["initialized"]) {
+  options.restoreDefaultOptions();
+  localStorage["initialized"] = true;
 }

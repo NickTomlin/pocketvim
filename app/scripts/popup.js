@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     currentUrls = options('enabled_urls') || '';
     if (currentUrls.indexOf(proposedUrl) === -1) {
       options('enabled_urls', currentUrls + proposedUrl + '\n' );
+      this.disabled = true;
     }
   });
 

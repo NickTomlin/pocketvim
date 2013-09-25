@@ -48,9 +48,14 @@ function save_options() {
     status.innerHTML = '';
   }, 750);
 }
+// default is initialy 'undefined', we set it to false when we retoreDefaults()
 
-// Restores select box state to saved value from localStorage.
-function restore_options() {
+/**
+ * Restore options from localstorage
+ * @param  {bool} reset reset options to defaults.
+ */
+function restoreOptions() {
+
   for (var i = 0; i < settingInputs.length; i++) {
     var key = settingInputs[i];
     var value = options(key);
@@ -74,5 +79,11 @@ function restore_options() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', restore_options);
+function resetOptions() {
+  options.restoreDefaultOptions();
+  restoreOptions();
+}
+
+document.addEventListener('DOMContentLoaded', restoreOptions);
 document.querySelector('#save').addEventListener('click', save_options);
+document.querySelector('#defaults').addEventListener('click', resetOptions);
