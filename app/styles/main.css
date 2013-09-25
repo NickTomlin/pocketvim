@@ -1,5 +1,66 @@
-/* Will be compiled down to a single stylesheet with your sass files */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/main\.scss}line{font-family:\000033}}
+body, input, textarea {
+  font-family: "Courier New", "Monaco", monospace;
+  line-height: 1.4;
+}
 
-html {
-    /* Defaults css for cssmin process */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/main\.scss}line{font-family:\000038}}
+body {
+  font-size: 100%;
+  color: #303942;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/main\.scss}line{font-family:\0000313}}
+input, textarea {
+  padding: .5em;
+  border-radius: 2px;
+  border-width: 2px;
+  border-style: solid;
+  -webkit-transition: border ease 0.2s;
+  -moz-transition: border ease 0.2s;
+  -ms-transition: border ease 0.2s;
+  -o-transition: border ease 0.2s;
+  transition: border ease 0.2s;
+  border-color: rgba(88, 79, 79, 0.73);
+  margin-bottom: 1.4em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/main\.scss}line{font-family:\0000322}}
+input:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(51, 167, 106, 0.73);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/main\.scss}line{font-family:\0000329}}
+textarea {
+  font-size: 1.1em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/_options\.scss}line{font-family:\000031}}
+.pocketvim-options {
+  width: 40em;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/_options\.scss}line{font-family:\000036}}
+.pocketvim-options a, .pocketvim-options a:visited {
+  color: #15c;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/_options\.scss}line{font-family:\000037}}
+.pocketvim-options a:active {
+  color: #052577;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/_options\.scss}line{font-family:\000038}}
+.pocketvim-options textarea {
+  width: 100%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/_popup\.scss}line{font-family:\000031}}
+.pocketvim-popup {
+  min-width: 300px;
+  padding: 1em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/ntomlin\/Workspace\/pocketvim\/app\/styles\/_popup\.scss}line{font-family:\000034}}
+.pocketvim-popup input {
+  width: 90%;
+  margin-bottom: .5em;
 }

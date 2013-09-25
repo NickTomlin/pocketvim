@@ -1,12 +1,10 @@
 .pocketvim-options {
-  font: 1.5em  "Courier New", "Monaco", monospace;
-  color: #303942;
   width: 40em;
   margin: 0 auto;
+  padding:1em 0;
 
   a, a:visited { color: #15c; }
   a:active { color: #052577; }
-  div#wrapper { width: 500px; }
   textarea {
     width:100%;
   }
