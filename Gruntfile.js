@@ -233,7 +233,7 @@ module.exports = function (grunt) {
         chromeManifest: {
             dist: {
                 options: {
-                    buildnumber: true,
+                    buildnumber: false,
                     background: {
                         target:'scripts/background.js'
                     }
@@ -254,8 +254,20 @@ module.exports = function (grunt) {
                     dest: ''
                 }]
             }
-        }
+        },
+        crx: {
+          pocketVimPublic: {
+           "src": "app/",
+           "dest": "package/"
+          }
+         }
     });
+
+    // this is going to bail without a PEM file
+    grunt.registerTask('package', [
+      'build',
+      'crx'
+    ]);
 
     grunt.registerTask('test', [
         'clean:server',
