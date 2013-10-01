@@ -95,7 +95,7 @@ Editors.Ace = function (){
 Editors.Ace.prototype = new Editor();
 
 Editors.Ace.prototype.getDependencies = function () {
-  return ['scripts/modules/ace/embed.js'];
+  return ['scripts/keybindings/ace/keybinding-vim.js','scripts/modules/ace/embed.js'];
 }
 
 /* ==========================================================================
@@ -138,10 +138,19 @@ attachListener = function () {
       if (event.source != window)
         return;
 
+      // split this out into individual functions
       if (event.data.type && (event.data.type == "DOMSPY")) {
         var options = JSON.parse(event.data.editorOptions);
         var editor = new Editors[event.data.editorName](options);
-        editor.loadDependencies();
+        if (document.readyState == 'complete') {
+            editor.loadDependencies();
+        } else {
+          // unfortunately 'DOMContentLoaded' appears to have iff support in background
+          // and injected scripts. We use 'load' instead.
+          window.addEventListener('load', function () {
+            editor.loadDependencies.call(editor);
+          }, false)
+        }
       }
   }, false);
 }
