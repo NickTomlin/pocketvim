@@ -140,6 +140,8 @@ attachListener = function () {
 
       // split this out into individual functions
       if (event.data.type && (event.data.type == "DOMSPY")) {
+        if (! event.data.editorName) return;
+
         var options = JSON.parse(event.data.editorOptions);
         var editor = new Editors[event.data.editorName](options);
         if (document.readyState == 'complete') {
