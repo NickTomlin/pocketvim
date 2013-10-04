@@ -5,7 +5,7 @@ A Chrome Extension that allows you to use Vim bindings in Codemirorr and Ace ena
 
 Installing
 ---
-A chrome web store version is coming eventually. For now, download the [crx File](https://db.tt/D3J720SE) (use "save link as" or ``curl -O https://db.tt/D3J720SE`` to avoid broken chrome auto-installing) and drag it into your chrome "extensions" window. If that's too easy, follow the instructions under hacking.
+A chrome web store version is coming eventually. For now, download the [crx File](https://db.tt/D3J720SE?dl=1) (use "save link as" or ``curl -O https://db.tt/D3J720SE`` to avoid broken chrome auto-installing) and drag it into your chrome "extensions" window. If that's too easy, follow the instructions under hacking.
 
 Hacking
 ---
