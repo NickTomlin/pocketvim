@@ -2,10 +2,10 @@
 'use strict';
 var assert = chai.assert;
 (function () {
-    describe('Give it some context', function () {
-        describe('maybe a bit more context here', function () {
-            it('should run here few assertions', function () {
-                assert(1 === 1, 'foo');
+    describe('Test isEnabled', function () {
+        describe('sanity', function () {
+            it('is function defined', function () {
+                assert(typeof isEnabled === 'function', 'is enabled is not defined');
             });
         });
     });
