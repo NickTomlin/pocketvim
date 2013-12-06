@@ -260,7 +260,24 @@ module.exports = function (grunt) {
            "src": "app/",
            "dest": "package/"
           }
-         }
+        },
+         testem: {
+           dev: {
+             // declared individually at the moment
+             // consider globbing later when we are sure
+             // we won't clobber
+             src: [
+                 'app/scripts/main.js',
+                 'test/spec/*.js'
+             ],
+             options: {
+                 before_tests: function (config, data, callback) {
+                     console.log(config);
+                     callback();
+                 }
+             }
+           }
+        }
     });
 
     // this is going to bail without a PEM file
@@ -270,10 +287,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
-        'connect:test',
-        'mocha'
+        'testem'
     ]);
 
     grunt.registerTask('build', [

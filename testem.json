@@ -1,0 +1,6 @@
+{
+    "framework": "mocha+chai",
+     "launch_in_ci": [
+         "PhantomJS"
+     ]
+}
