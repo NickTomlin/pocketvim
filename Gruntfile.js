@@ -32,6 +32,10 @@ module.exports = function (grunt) {
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
+            },
+            test: {
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.js','test/spec/*.js'],
+                tasks: ['testem']
             }
         },
         connect: {
@@ -267,15 +271,11 @@ module.exports = function (grunt) {
              // consider globbing later when we are sure
              // we won't clobber
              src: [
+                 'test/lib/chrome_helper.js',
                  'app/scripts/main.js',
+                 'app/scripts/tester.js',
                  'test/spec/*.js'
              ],
-             options: {
-                 before_tests: function (config, data, callback) {
-                     console.log(config);
-                     callback();
-                 }
-             }
            }
         }
     });
@@ -304,8 +304,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'jshint',
         'test',
-        'build'
     ]);
 };
