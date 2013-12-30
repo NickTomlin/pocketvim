@@ -266,7 +266,7 @@ module.exports = function (grunt) {
           }
         },
          testem: {
-           dev: {
+           unit: {
              // declared individually at the moment
              // consider globbing later when we are sure
              // we won't clobber
@@ -276,6 +276,9 @@ module.exports = function (grunt) {
                  'app/scripts/tester.js',
                  'test/spec/*.js'
              ],
+           },
+           integration: {
+               test_page: 'test/integration.html'
            }
         }
     });
