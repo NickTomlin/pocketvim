@@ -1,0 +1,5 @@
+root = true
+# Tab indentation (no size specified)
+[*.js]
+indent_style = space
+indent_size = 2
