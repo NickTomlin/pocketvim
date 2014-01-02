@@ -1,4 +1,3 @@
-;(function (window, undefined) {
 "use strict";
 
 var Editors = {},
@@ -157,4 +156,3 @@ attachListener = function () {
   }, false);
 }
 
-}(window, undefined))
