@@ -1,6 +1,10 @@
-/* global window */
+// our global namespace
+PocketVim = PocketVim || {};
+
 (function (window) {
-var domSpy = {};
+// purposefully global
+var domspy = PocketVim.domSpy = {};
+
 domSpy.cm = window.CodeMirror ? "CodeMirror" : undefined, domSpy.ace = window.ace ? "Ace" : undefined;
 
 var editor = {
