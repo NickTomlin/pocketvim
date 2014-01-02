@@ -1,4 +1,5 @@
-// @todo iffe for andboxing and protection?
+/* global window */
+(function (window) {
 var domSpy = {};
 domSpy.cm = window.CodeMirror ? "CodeMirror" : undefined, domSpy.ace = window.ace ? "Ace" : undefined;
 
@@ -10,3 +11,4 @@ var editor = {
 };
 
 window.postMessage({type: "DOMSPY", editorName: editor.name, editorOptions: JSON.stringify(editor.options) }, "*");
+}(window));
