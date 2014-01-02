@@ -11,4 +11,4 @@ PocketVim.activate = function () {
     });
 };
 
-PocketVim.editor.activate();
+PocketVim.activate();
