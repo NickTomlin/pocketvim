@@ -1,7 +1,11 @@
 {
     "framework": "mocha+chai",
-     "launch_in_ci": [
+     "launch_in_dev": [
          "phantomjs"
+     ],
+     "launch_in_ci": [
+         "phantomjs",
+         "chrome"
      ],
      "src_files":[
          "test/lib/chrome_helper.js",
