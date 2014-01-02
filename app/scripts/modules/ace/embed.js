@@ -2,7 +2,7 @@ var PocketVim = PocketVim || {};
 
 PocketVim.activate = function () {
     // github also adds a class of .ace-github to ace instance
-    var instances = document.querySelectorAll(".ace_editor");
+    var instances = document.querySelectorAll(PocketVim.editor.selector);
     Array.prototype.forEach.call(instances, function(instance) {
     instance
       .env
