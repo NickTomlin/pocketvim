@@ -25,7 +25,7 @@ injectScript = function (url, callback) {
     // @todo potentially remove parentNode here and then call callback?
     s.onload = callback;
     (document.head||document.documentElement).appendChild(s);
-}
+};
 
 /* ==========================================================================
    Editor
@@ -43,7 +43,7 @@ load = function (sources, current) {
 
   var next = function () {
     load(sources, current + 1);
-  }
+  };
 
   if ( typeof sources[current] === 'undefined' || sources[current] === '' ) {
     next();
@@ -52,7 +52,7 @@ load = function (sources, current) {
       next();
     });
   }
-}
+};
 
 /**
  * A small configurable class to normalize interaction with dom-based editor
@@ -89,13 +89,13 @@ Editor.prototype.get = function () {};
    ========================================================================== */
 Editors.Ace = function (){
     Editor.apply(this, arguments);
-}
+};
 
 Editors.Ace.prototype = new Editor();
 
 Editors.Ace.prototype.getDependencies = function () {
   return ['scripts/keybindings/ace/keybinding-vim.js','scripts/modules/ace/embed.js'];
-}
+};
 
 /* ==========================================================================
    CodeMirror
@@ -103,7 +103,7 @@ Editors.Ace.prototype.getDependencies = function () {
 
 Editors.CodeMirror = function (){
     Editor.apply(this, arguments);
-}
+};
 
 Editors.CodeMirror.prototype = new Editor();
 
@@ -112,7 +112,7 @@ Editors.CodeMirror.prototype.getDependencies = function () {
   // we need to check for a version to get the appropriate binding
   var binding = this.options.version && this.options.version < 3.15 ? 'scripts/keybindings/codemirror/legacyvim.js' : 'scripts/keybindings/codemirror/vim.js';
   return [binding,'scripts/modules/codemirror/embed.js'];
-}
+};
 
 /* ==========================================================================
    Page Interaction
@@ -150,9 +150,9 @@ attachListener = function () {
           // and injected scripts. We use 'load' instead.
           window.addEventListener('load', function () {
             editor.loadDependencies.call(editor);
-          }, false)
+          }, false);
         }
       }
   }, false);
-}
+};
 

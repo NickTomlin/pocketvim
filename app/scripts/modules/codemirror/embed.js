@@ -6,6 +6,6 @@ PocketVim.embedCM = function () {
   Array.prototype.forEach.call(mirrors, function (instance){
    instance.CodeMirror.setOption('keyMap','vim');
   });
-}
+};
 
 PocketVim.embedCM();

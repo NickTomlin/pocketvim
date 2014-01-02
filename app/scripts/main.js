@@ -82,7 +82,7 @@ options.restoreDefaultOptions = function () {
     if (defaults.hasOwnProperty(prop))
       options(prop, defaults[prop]);
   }
-}
+};
 
 // inspired / stolen from Vimium
 isEnabled = function (request) {
@@ -101,7 +101,7 @@ isEnabled = function (request) {
 
 publicApi = {
   isEnabled: isEnabled,
-}
+};
 
 // set defaults (hopefully only once ;)
 if (! localStorage["initialized"]) {

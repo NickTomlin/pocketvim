@@ -2,13 +2,13 @@ var PocketVim = PocketVim || {};
 
 PocketVim.embedAce = function () {
     // github also adds a class of .ace-github to ace instance
-    var instances = document.querySelectorAll(".ace_editor")
+    var instances = document.querySelectorAll(".ace_editor");
     Array.prototype.forEach.call(instances, function(instance) {
     instance
       .env
       .editor
       .setKeyboardHandler(ace.require("ace/keyboard/vim").handler);
     });
-}
+};
 
 PocketVim.embedAce();

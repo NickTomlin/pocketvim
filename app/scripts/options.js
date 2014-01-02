@@ -23,7 +23,7 @@ function getInputValue(ele) {
       var cleanedValues = this.value
                             .split('\n')
                             .filter(function(value){
-                              return value !== ""
+                              return value !== "";
                             })
                             .join('\n') + '\n';
       this.value = cleanedValues;
@@ -40,7 +40,7 @@ function save_options() {
     var inputName = settingInputs[i];
     var input = getInput(inputName);
     options(inputName, getInputValue(input));
-  };
+  }
   // Update status to let user know options were saved.
   var status = document.getElementById('status');
   status.innerHTML = 'Options Saved.';
