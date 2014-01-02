@@ -1,18 +1,30 @@
 // our global namespace
-PocketVim = PocketVim || {};
+var PocketVim = PocketVim || {};
 
 (function (window) {
-// purposefully global
-var domspy = PocketVim.domSpy = {};
+    var domSpy = PocketVim.domSpy = {};
 
-domSpy.cm = window.CodeMirror ? "CodeMirror" : undefined, domSpy.ace = window.ace ? "Ace" : undefined;
+    var editors = {
+        "CodeMirror": {
+            "selector": ".CodeMirror"
+        },
+        "Ace": {
+            "selector": ".ace_editor"
+        }
+    };
 
-var editor = {
-  name: domSpy.cm || domSpy.ace,
-  options: {
-    version: window.CodeMirror && window.CodeMirror.version || false
-  }
-};
+    // @todo this can probably be expressed in a cleaner way
+    domSpy.cm = window.CodeMirror ? "CodeMirror" : undefined;
+    domSpy.ace = window.ace ? "Ace" : undefined;
+    var name = domSpy.cm || domSpy.ace;
 
-window.postMessage({type: "DOMSPY", editorName: editor.name, editorOptions: JSON.stringify(editor.options) }, "*");
+    var editor = PocketVim.editor = {
+      name: name,
+      selector: editors[name].selector,
+      options: {
+        version: window.CodeMirror && window.CodeMirror.version || false
+      }
+    };
+
+    window.postMessage({type: "DOMSPY", editorName: editor.name, editorOptions: JSON.stringify(editor.options) }, "*");
 }(window));
