@@ -2,7 +2,7 @@
     "name": "Pocket Vim",
     "version": "0.1.0",
     "manifest_version": 2,
-    "description": "Enable bindings on on sites like Github Gists, JS Bin, CodePen and more. Most sites that use an Ace or CodeMirror based editor are supported.",
+    "description": "Enable bindings on on sites like Github Gists, JS Bin, CodePen and more.",
     "default_locale": "en",
     "icons": {
         "64": "images/icon.png"
