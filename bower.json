@@ -1,6 +1,10 @@
 {
   "name": "pocketvim",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "codemirror": "codemirror#~3.22.0",
+    "codemirror-legacy": "codemirror#3.13.0"
+  },
+  "private": true
 }

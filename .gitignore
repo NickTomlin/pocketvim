@@ -3,3 +3,4 @@ dist
 .tmp
 *.pem
 package
+bower_components
