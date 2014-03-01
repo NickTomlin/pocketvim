@@ -1,6 +1,6 @@
 {
     "indent": false,
-    "globals": { "chrome": false },
+    "globals": { "chrome": false, "require": false, "define": false },
     "browser": true,
     "node": true
 }
