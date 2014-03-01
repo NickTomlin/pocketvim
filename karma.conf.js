@@ -4,20 +4,18 @@
 module.exports = function(config) {
   config.set({
 
-    // base path, that will be used to resolve files and exclude
     basePath: '',
-
 
     // frameworks to use
     frameworks: ['jasmine'],
 
-
-    // list of files / patterns to load in the browser
     files: [
+      // application
       'app/scripts/spec-test.js',
-      // {pattern: 'test/**/*.js', included: false},
-      'test/unit/test-spec.js',
-      'test/support/codemirror.html'
+      // test related
+      'test/unit/**/*-test.js',
+      'test/unit/support/codemirror.html',
+      'bower_components/codemirror/lib/*'
     ],
 
     preprocesors : {
@@ -42,7 +40,7 @@ module.exports = function(config) {
 
 
     // web server port
-    port: 9876,
+    port: 7357,
 
 
     // enable / disable colors in the output (reporters and logs)
@@ -57,15 +55,6 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera (has to be installed with `npm install karma-opera-launcher`)
-    // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
-    // - PhantomJS
-    // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
     browsers: ['Chrome'],
 
 
