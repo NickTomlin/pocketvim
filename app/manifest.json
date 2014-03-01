@@ -13,6 +13,10 @@
     },
     "background": {
         "scripts": [
+            "scripts/lib/require.js",
+            "scripts/requireConfig.js",
+            "scripts/requireContent.js",
+            "scripts/lib/require.js",
             "scripts/main.js"
         ]
     },
@@ -23,7 +27,8 @@
                 "<all_urls>"
             ],
             "js": [
-                "scripts/page.js"
+                "scripts/page.js",
+                "scripts/lib/require.js"
             ]
         }
     ],
