@@ -1,3 +1,5 @@
+'use strict';
+
 var getCurrentTab,
 getCurrentUrl,
 options,
@@ -87,7 +89,7 @@ options.restoreDefaultOptions = function () {
 // inspired / stolen from Vimium
 isEnabled = function (request) {
   var url = request.url;
-  enabledUrls = options("enabled_urls");
+  var enabledUrls = options("enabled_urls");
   var enabled = false;
 
   // handle wildcard in enabled urls
@@ -104,7 +106,7 @@ publicApi = {
 };
 
 // set defaults (hopefully only once ;)
-if (! localStorage["initialized"]) {
+if (! localStorage.initialized) {
   options.restoreDefaultOptions();
-  localStorage["initialized"] = true;
+  localStorage.initialized = true;
 }
