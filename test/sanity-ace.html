@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    #editor {
+        position: absolute;
+        width: 500px;
+        height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="editor">foo</textarea>
+</body>
+<script src="../bower_components/ace/lib/ace/ace.js"></script>
+<script type="text/javascript" charset="utf-8">
+  var editor = ace.edit("editor");
+</script>
+</html>
