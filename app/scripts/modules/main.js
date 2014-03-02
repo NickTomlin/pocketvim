@@ -69,11 +69,10 @@ define(function (require, exports, module) {
     };
 
     var all = function () {
-      var allSettings = [];
+      var allSettings = {};
       for (var prop in localStorage) {
         var setting = {};
-        setting[prop] = localStorage[prop];
-        allSettings.push(setting);
+        allSettings[prop] =localStorage[prop];
       }
       return allSettings;
     };
