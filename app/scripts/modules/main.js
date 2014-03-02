@@ -31,10 +31,6 @@ define(function (require, exports, module) {
     });
   };
 
-  module.exports.hello = function () {
-    return 'hello';
-  };
-
   getCurrentTab = module.exports.getCurrentTab = function (callback) {
     chrome.tabs.query({
       active: true,

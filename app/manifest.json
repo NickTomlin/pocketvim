@@ -12,13 +12,7 @@
         "default_popup": "html/popup.html"
     },
     "background": {
-        "scripts": [
-            "scripts/lib/require.js",
-            "scripts/requireConfig.js",
-            "scripts/requireContent.js",
-            "scripts/lib/require.js",
-            "scripts/main.js"
-        ]
+        "page": "html/background.html"
     },
     "options_page": "html/options.html",
     "content_scripts": [
@@ -28,15 +22,17 @@
             ],
             "js": [
                 "scripts/page.js",
-                "scripts/lib/require.js"
+                "scripts/lib/require.js",
+                "scripts/requireConfig.js",
+                "scripts/requireContent.js"
             ]
         }
     ],
     "permissions": [
-        "http://*/*",
-        "https://*/*",
-        "background",
-        "tabs"
+        // "http://*/*",
+        // "https://*/*",
+        // "background",
+        // "tabs"
     ],
     "web_accessible_resources": [
         "scripts/*",

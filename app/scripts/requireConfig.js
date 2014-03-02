@@ -1,3 +1,3 @@
 var requirejsConfig = {
-  baseUrl: 'scripts/modules',
+  baseUrl: '/scripts/modules',
 };
