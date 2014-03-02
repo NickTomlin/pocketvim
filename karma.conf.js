@@ -7,16 +7,24 @@ module.exports = function(config) {
     basePath: '',
 
     // frameworks to use
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'requirejs'],
 
     files: [
       // application
-      'app/scripts/spec-test.js',
-      // test related
-      'test/unit/**/*-test.js',
-      'test/unit/support/codemirror.html',
-      'bower_components/codemirror/lib/*'
+      {pattern: 'app/scripts/modules/*.js', included: false},
+      // testing
+      {pattern: 'test/unit/*-test.js', included: false},
+      'test/unit/support/*.html',
+      'bower_components/codemirror/lib/*',
+      // requirejs bootstrap for testing
+      'test/unit/karma-init.js'
     ],
+
+    // // list of files to exclude
+    // exclude: [
+    //   // ignoring for now, as __HTML__ is broken
+    //   'test/unit/codemirror-embed-test.js'
+    // ],
 
     preprocesors : {
       '**/*.html': 'html2js'
@@ -24,15 +32,10 @@ module.exports = function(config) {
 
     plugins: [
       'karma-jasmine',
+      'karma-requirejs',
       'karma-chrome-launcher',
       'karma-html2js-preprocessor'
     ],
-
-    // list of files to exclude
-    exclude: [
-
-    ],
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'

@@ -14,7 +14,6 @@ describe("CodeMirror embed", function () {
   });
 
   it('enables vim keybinding on textarea', function () {
-    // our require here?
-    expect(cmInstance).toHaveProperty('foo');
+    expect(cmInstance).toBeDefined();
   });
 });

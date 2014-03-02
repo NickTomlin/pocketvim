@@ -1,47 +1,34 @@
-/*global describe, it, chrome, options */
+/*global describe, expect, it, chrome */
 'use strict';
 
-var assert = chai.assert;
+define(['modules/main'], function (main) {
+    describe('#isEnabled', function () {
+            var isEnabled = main.isEnabled;
 
-// mock "options"
-var options = function (option) {
-    var opts = {
-        "foo": "bar",
-        "enabled_urls": [
-           'http://jsbin.com/*',
-           'http://jsfiddle.net/*',
-           'http://www.google.com',
-           'http://www.google.com/true'
-        ].join('\n')
-    }
-    return opts[option];
-};
+            it('should not match non_enabled urls', function () {
+                expect(isEnabled({url: 'http://foo.com/bar'})).toBeFalsy();
+                expect(isEnabled({url: 'http://www.google.com/false'})).toBeFalsy();
+            });
 
-(function () {
-    describe('Test isEnabled', function () {
-        describe('test our mocks', function () {
-            it('should use our copy of options', function (){
-                assert(options("foo") === "bar", 'mock options is not in scope ')
+            it('should match enabled urls at root', function () {
+                expect(isEnabled({url: 'http://jsbin.com/'})).toBeTruthy();
+            });
+
+            it('should match wildcard urls', function () {
+                expect(isEnabled({url: 'http://jsbin.com/foo/bar/baz'})).toBeTruthy();
+                expect(isEnabled({url: 'http://jsbin.com/var/1'})).toBeTruthy();
+            });
+
+            it('should not match before wildcard paths', function () {
+                expect(isEnabled({url: 'http://cssdeck.com/'})).toBeFalsy();
             })
-        })
-        describe('check urls', function () {
-            it('is a function', function () {
-                assert(typeof isEnabled === 'function', 'isEnabled is not a function');
-            });
-
-            it('url regex', function () {
-                assert(isEnabled({url: 'http://foo.com/bar'}) === false, 'failed to check non enabled url');
-                // why isn't this working?
-                assert(isEnabled({url: 'http://www.google.com/false'}) === false, 'false positive non wildcard');
-                assert(isEnabled({url: 'http://www.google.com/true' }) === true, 'failed non wildcard path');
-                assert(isEnabled({url: 'http://www.google.com'}) === true, 'failed exact path');
-            });
-
-            it('wildcards', function () {
-                assert(isEnabled({url: 'http://jsbin.com/foo/bar'}) === true, 'failed to enable  jsbin');
-                assert(isEnabled({url: 'http://jsfiddle.net/nV3nF/'}) === true, 'failed to enable jsfiddle');
-                assert(isEnabled({url: 'http://foo.net/nV3nF/'}) === false, 'falsely enabled wildcard');
-            });
-        });
     });
-})();
+
+    describe('#options', function () {
+      var options = main.options;
+
+      it('returns all options if no argument is given', function () {
+        expect(options()).toBeTruthy();
+      })
+    });
+})
