@@ -1,17 +1,7 @@
 'use strict';
 
-define(function (exports, require, module) {
-  var defaults = {
-    enabled_urls : [
-    'http://jsbin.com/*',
-    'http://jsfiddle.net/*',
-    'http://codepen.io/pen/*',
-    'https://gist.github.com/*',
-    'http://gist.github.com/*',
-    'http://cssdeck.com/labs/*',
-    'http://dillinger.io/*'
-    ].join('\n'),
-  };
+define(function (require, exports, module) {
+  var defaults = require('modules/config');
 
   /**
     * Get and Set for localstorage based options
