@@ -1,23 +1,27 @@
 <html>
-<head><title>PocketVim Options</title></head>
-<link rel="stylesheet" type="text/css" href="../styles/main.css">
-<body class="pocketvim-options">
-<h2>Enabled Urls:</h2>
-<p>(One per line please)</p>
-<textarea name="enabled_urls" id="enabled_urls" cols="30" rows="10"></textarea>
-<div id="status"></div>
-<button id="save">Save</button>
+  <head>
+    <title>PocketVim | Options</title>
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
+  </head>
 
-<h2>Defaults</h2>
-<p>Warning: this will reset all options. Use with care.</p>
-<button id="defaults">Restore Defaults</button>
-</body>
+  <body class="pocketvim-options">
+    <div id="content">
+      <h2>Enabled Urls:</h2>
+      <p>(One per line please)</p>
+      <textarea name="enabled_urls" id="enabled_urls" cols="30" rows="10"></textarea>
+      <div id="status"></div>
+      <button id="save">Save</button>
 
-<!-- build:js ../scripts/options.js -->
-<script src="../scripts/lib/require.js"></script>
-<script src="../scripts/requireConfig.js"></script>
-<script src="../scripts/main.js"></script>
-<script src="../scripts/options-page.js"></script>
-<!-- endbuild -->
+      <h2>Defaults</h2>
+      <p>Warning: this will reset all options. Use with care.</p>
+      <button id="defaults">Restore Defaults</button>
+    </div>
 
+    <!-- build:js ../scripts/options.js -->
+    <script src="../scripts/lib/require.js"></script>
+    <script src="../scripts/requireConfig.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/options-page.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>
