@@ -1,13 +1,15 @@
 'use strict';
 
-// Saves options to localStorage.
-var options = chrome.extension.getBackgroundPage().options;
+define(function (require, exports, module) {
+  var options = require('./options');
+
+  var root;
 
 // our option inputs
 var settingInputs = ['enabled_urls'];
 
 function getInput (name) {
-  return document.querySelector('[name="'+ name + '"]');
+  return root.querySelector('[name="'+ name + '"]');
 }
 
 function getInputValue(ele) {
@@ -84,6 +86,11 @@ function resetOptions() {
   restoreOptions();
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelector('#save').addEventListener('click', save_options);
-document.querySelector('#defaults').addEventListener('click', resetOptions);
+module.exports.init = function (rootElement) {
+  root = rootElement;
+  restoreOptions();
+  document.querySelector('#save').addEventListener('click', save_options);
+  document.querySelector('#defaults').addEventListener('click', resetOptions);
+}
+
+});

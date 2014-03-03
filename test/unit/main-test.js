@@ -23,12 +23,4 @@ define(['modules/main'], function (main) {
                 expect(isEnabled({url: 'http://cssdeck.com/'})).toBeFalsy();
             })
     });
-
-    describe('#options', function () {
-      var options = main.options;
-
-      it('returns all options if no argument is given', function () {
-        expect(options()).toBeTruthy();
-      })
-    });
 })
