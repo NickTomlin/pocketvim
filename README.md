@@ -5,9 +5,9 @@ A Chrome Extension that allows you to use Vim bindings in Codemirorr and Ace ena
 
 Installing
 ---
-A chrome web store version is coming eventually. For now, download the [crx File](https://db.tt/D3J720SE?dl=1) (use "save link as" or ``curl -O https://db.tt/D3J720SE`` to avoid broken chrome auto-installing) and drag it into your chrome "extensions" window. If that's too easy, follow the instructions under hacking.
+Install on the [Chrome web store](https://chrome.google.com/webstore/detail/pocket-vim/pjnhffdkdckcagdmfmidafhppbomjdjg?hl=en&gl=US).
 
-Hacking
+Development
 ---
 
 Loading Dependencies:
@@ -17,12 +17,11 @@ Loading Dependencies:
 - ``bower install``
 
 
-Viewing your changes:
+Loading the extension:
 
-- ``grunt build``
 - In chrome:
   - open your chrome "extensions tab"
   - check the "developer mode" checkbox
   - click "load unpacked extension"
-  - point the file browser to the repo's 'dist' folder
+  - point the file browser to the repo's 'app' directory
   - enjoy.
