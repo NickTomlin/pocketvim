@@ -5,7 +5,13 @@
     "require": false,
     "define": false,
     "requirejs": false,
-    "expect": false
+    "expect": false,
+    "describe": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "it": false,
+    "expect": false,
+    "__html__": false
   },
   "browser": true,
   "node": true
