@@ -1,10 +1,10 @@
 {
   "indent": false,
   "globals": {
-    "chrome": false
-    "require": false
-    "define": false
-    "requirejs": false
+    "chrome": false,
+    "require": false,
+    "define": false,
+    "requirejs": false,
     "expect": false
   },
   "browser": true,
