@@ -32,10 +32,6 @@ module.exports = function (grunt) {
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
-            },
-            test: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js','test/spec/*.js'],
-                tasks: ['testem']
             }
         },
         connect: {
@@ -49,7 +45,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
+                            mountFolder(connect, 'test/fixtures')
                         ];
                     }
                 }
@@ -265,21 +261,10 @@ module.exports = function (grunt) {
            "dest": "package/"
           }
         },
-         testem: {
-           unit: {
-             // declared individually at the moment
-             // consider globbing later when we are sure
-             // we won't clobber
-             src: [
-                 'test/lib/chrome_helper.js',
-                 'app/scripts/main.js',
-                 'app/scripts/tester.js',
-                 'test/spec/*.js'
-             ],
-           },
-           integration: {
-               test_page: 'test/integration.html'
-           }
+        karma: {
+          unit: {
+            configFile: 'karma.conf.js',
+          }
         }
     });
 
@@ -289,9 +274,7 @@ module.exports = function (grunt) {
       'crx'
     ]);
 
-    grunt.registerTask('test', [
-        'testem'
-    ]);
+    grunt.registerTask('test', ['karma']);
 
     grunt.registerTask('build', [
         'clean:dist',
