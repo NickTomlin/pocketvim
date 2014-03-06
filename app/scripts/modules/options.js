@@ -16,6 +16,7 @@ define(function (require, exports, module) {
     var set = function () {
       var key = arguments[0];
       var value = arguments[1];
+
       localStorage[key] = value;
     };
 
@@ -23,7 +24,7 @@ define(function (require, exports, module) {
       var allSettings = {};
       for (var prop in localStorage) {
         var setting = {};
-        allSettings[prop] =localStorage[prop];
+        allSettings[prop] = localStorage[prop];
       }
       return allSettings;
     };
@@ -42,4 +43,4 @@ define(function (require, exports, module) {
         options(prop, defaults[prop]);
     }
   };
-})
+});
