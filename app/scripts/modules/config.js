@@ -9,7 +9,10 @@ define(function (require, exports, module) {
     'https://gist.github.com/*',
     'http://gist.github.com/*',
     'http://cssdeck.com/labs/*',
-    'http://dillinger.io/*'
-    ].join('\n')
+    'http://dillinger.io/*',
+    // needed for initialization
+    ''
+    ].join('\n'),
+    initialized: false
   };
 });
