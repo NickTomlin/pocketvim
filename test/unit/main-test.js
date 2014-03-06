@@ -1,7 +1,11 @@
 /*global describe, expect, it, chrome */
 'use strict';
 
-define(['modules/main'], function (main) {
+define(['modules/main', 'test/unit/support/resetoptions'], function (main, resetOptions) {
+    beforeEach(function () {
+      resetOptions();
+    });
+
     describe('#isEnabled', function () {
             var isEnabled = main.isEnabled;
 
