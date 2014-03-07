@@ -40,12 +40,13 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test/fixtures')
-                        ];
-                    }
+                    base: 'test/integration',
+                    middleware: function (connect, options, middlewares) {
+                        middlewares.push(mountFolder(connect, 'bower_components'));
+
+                        return middlewares;
+                    },
+                    keepalive: true
                 }
             }
         },
@@ -273,6 +274,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', ['karma']);
+    grunt.registerTask('integration', ['connect:test']);
 
     grunt.registerTask('build', [
         'clean:dist',
