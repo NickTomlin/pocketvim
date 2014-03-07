@@ -1,13 +1,13 @@
 /*global describe, expect, it, chrome */
 'use strict';
 
-define(['modules/main', 'test/unit/support/resetoptions'], function (main, resetOptions) {
+define(['modules/background', 'test/unit/support/resetoptions'], function (background, resetOptions) {
     beforeEach(function () {
       resetOptions();
     });
 
     describe('#isEnabled', function () {
-            var isEnabled = main.isEnabled;
+            var isEnabled = background.isEnabled;
 
             it('should not match non_enabled urls', function () {
                 expect(isEnabled({url: 'http://foo.com/bar'})).toBeFalsy();
@@ -25,6 +25,6 @@ define(['modules/main', 'test/unit/support/resetoptions'], function (main, reset
 
             it('should not match before wildcard paths', function () {
                 expect(isEnabled({url: 'http://cssdeck.com/'})).toBeFalsy();
-            })
+            });
     });
-})
+});
