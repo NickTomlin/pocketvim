@@ -20,7 +20,7 @@ module.exports = function(config) {
       {pattern: 'test/unit/support/*.js', included: false},
       'bower_components/codemirror/lib/*',
       // requirejs bootstrap for testing
-      'test/unit/karma-init.js'
+      'test/unit/test-helper.js'
     ],
 
     // list of files to exclude
