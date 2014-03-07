@@ -1,5 +1,3 @@
-/*jshint camelcase: false*/
-// Generated on 2013-09-23 using generator-chrome-extension 0.2.5
 'use strict';
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
@@ -268,7 +266,7 @@ module.exports = function (grunt) {
         }
     });
 
-    // this is going to bail without a PEM file
+    // **warning** this is going to fail without a PEM file in the repo
     grunt.registerTask('package', [
       'build',
       'crx'

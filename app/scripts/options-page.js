@@ -1,5 +1,3 @@
-/* locals: requireJsConfig */
-
 requirejs.config(requirejsConfig);
 
 require(['modules/options-page'], function (optionsPage) {
