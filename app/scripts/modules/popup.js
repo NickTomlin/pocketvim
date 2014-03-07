@@ -1,11 +1,14 @@
+'use strict';
+
 define(function (require, exports, module){
   var root;
   var submit;
 
-  options = require('./options');
+  var options = require('./options');
 
-  function Popup (root) {
+  function Popup (root, global) {
     this.root = root;
+    this.global = global;
 
     this.initialize();
   }
@@ -14,22 +17,19 @@ define(function (require, exports, module){
     this.input = this.root.querySelector('[name="current_url"]');
     this.submit = this.root.querySelector('#save');
 
-    this.submit.addEventListener('click', this.saveOption);
+    this.submit.addEventListener('click',  this.saveOption.bind(this));
+
+    this.getUrl();
   };
 
   Popup.prototype._parseTabUrl = function (url) {
-      // tab url is equivalent to window.location
-      return url + '/*';
-  };
-
-  Popup.prototype.setUrl = function (url) {
-    this.input.value = _parseTabUrl(url);
+    return url.split('/').slice(0,3).join('/') + '/*';
   };
 
   Popup.prototype.getUrl = function () {
     var self = this;
 
-    chrome.tabs.query({
+    this.global.tabs.query({
       active: true,
       lastFocusedWindow: true
     }, function (tabs) {
@@ -38,10 +38,13 @@ define(function (require, exports, module){
     });
   };
 
-  Popup.prototype.saveOption = function () {
-    proposedUrl = this.input.value.trim(); // chrome supports string.trim ^^
+  Popup.prototype.setUrl = function (url) {
+    this.input.value = this._parseTabUrl(url);
+  };
 
-    currentUrls = options('enabled_urls') || '';
+  Popup.prototype.saveOption = function () {
+    var proposedUrl = this.input.value.trim();
+    var currentUrls = options('enabled_urls') || '';
 
     if (currentUrls.indexOf(proposedUrl) === -1) {
       var newUrls = currentUrls + proposedUrl + '\n';
