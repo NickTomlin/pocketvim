@@ -12,7 +12,8 @@ defaults = {
    'https://gist.github.com/*',
    'http://gist.github.com/*',
    'http://cssdeck.com/labs/*',
-   'http://dillinger.io/*'
+   'http://dillinger.io/*',
+   ''
   ].join('\n'),
 };
 
