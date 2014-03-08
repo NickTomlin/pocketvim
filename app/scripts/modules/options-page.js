@@ -87,7 +87,7 @@ define(function (require, exports, module) {
     restoreOptions();
   }
 
-  module.exports.init = function (rootElement) {
+  module.exports.initialize = function (rootElement) {
     root = rootElement;
     restoreOptions();
 

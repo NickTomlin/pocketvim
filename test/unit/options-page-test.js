@@ -18,7 +18,7 @@ define(['modules/options-page', 'test/unit/support/resetoptions'], function (opt
 
     resetOptions();
 
-    optionsPage.init(fixture);
+    optionsPage.initialize(fixture);
   });
 
   afterEach(function () {
