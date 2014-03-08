@@ -10,14 +10,14 @@ Install on the [Chrome web store](https://chrome.google.com/webstore/detail/pock
 Development
 ---
 
-Loading Dependencies:
+# Setup
 
 - clone this repo
 - ``npm install``
 - ``bower install``
 
 
-Loading the extension:
+# Loading the extension:
 
 - In chrome:
   - open your chrome "extensions tab"
@@ -25,3 +25,19 @@ Loading the extension:
   - click "load unpacked extension"
   - point the file browser to the repo's 'app' directory
   - enjoy.
+
+# Testing
+
+Unit tests:
+
+```
+grunt karma
+```
+
+Manual "integration" testing:
+
+```
+grunt connect
+```
+Open localhost:9000/codemirror.html and localhost:9000/ace.html with the development version of the extension loaded to make sure everything is playing nice.
+
