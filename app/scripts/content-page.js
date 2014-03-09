@@ -1,5 +1,5 @@
 requirejs.config(requirejsConfig);
 
 require(['modules/page'], function (page) {
-  page.initialize();
+  page.initialize(Chrome);
 });

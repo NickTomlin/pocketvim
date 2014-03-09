@@ -36,10 +36,11 @@ define(function (require, exports, module) {
     }, false);
   };
 
-  initialize = module.exports.initialize = function () {
+  initialize = module.exports.initialize = function (api) {
+    api = api || chrome;
     var currentDomain = window.location.origin + window.location.pathname;
 
-    chrome.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
+    api.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
         // we don't want to do anything if the domain is not enabled
         if (!response) { return; }
 
