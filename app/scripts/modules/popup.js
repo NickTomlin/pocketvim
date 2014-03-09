@@ -1,9 +1,7 @@
 'use strict';
 
 define(function (require, exports, module){
-  var root;
-  var submit;
-
+  var root, submit;
   var options = require('./options');
 
   function Popup (root, global) {

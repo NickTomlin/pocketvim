@@ -1,6 +1,4 @@
-// our global namespace
 var PocketVim = PocketVim || {};
-
 (function (window) {
     var domSpy = PocketVim.domSpy = {};
 

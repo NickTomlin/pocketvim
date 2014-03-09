@@ -21,10 +21,10 @@
                 "<all_urls>"
             ],
             "js": [
-                "scripts/page.js",
                 "scripts/lib/require.js",
                 "scripts/requireConfig.js",
-                "scripts/requireContent.js"
+                "scripts/requireContent.js",
+                "scripts/content-page.js"
             ]
         }
     ],

@@ -1,10 +1,7 @@
 'use strict';
 
-var isEnabled,
-handlers,
-addListener;
-
 define(function (require, exports, module) {
+  var isEnabled, handlers, addListener;
   var options = require('modules/options');
   /**
    * Attach chrome onMessage listner. Inspired by vimium event bus.

@@ -1,10 +1,8 @@
 'use strict';
 
 define(function (require, exports, module) {
-  var options = require('./options');
-
   var root;
-
+  var options = require('./options');
   // our option inputs
   var settingInputs = ['enabled_urls'];
 
