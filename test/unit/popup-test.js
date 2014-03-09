@@ -1,4 +1,4 @@
-define(['modules/popup', 'modules/options', 'test/unit/support/resetoptions'], function (Popup, options, resetOptions) {
+define(['modules/popup', 'modules/options', 'test/unit/support/resetoptions', 'test/unit/support/mockchrome'], function (Popup, options, resetOptions, mockChrome) {
   describe('popup', function () {
     var fixture, popup, popupPageHTML;
 
@@ -13,16 +13,6 @@ define(['modules/popup', 'modules/options', 'test/unit/support/resetoptions'], f
       fixture.innerHTML = popupPageHTML.innerHTML;
 
       resetOptions();
-
-      Mock = {
-        tabs: {
-          query: function () {
-            return window.location;
-          }
-        }
-      };
-
-      var mockChrome = Object.create(Mock);
 
       // not sure about this solution
       // depenency injection ftl?
