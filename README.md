@@ -5,7 +5,7 @@ A Chrome Extension that allows you to use Vim bindings in Codemirorr and Ace ena
 
 Installing
 ---
-Install on the [Chrome web store](https://chrome.google.com/webstore/detail/pocket-vim/pjnhffdkdckcagdmfmidafhppbomjdjg?hl=en&gl=US).
+Install on the [Chrome web store](https://chrome.google.com/webstore/detail/pocket-vim/pjnhffdkdckcagdmfmidafhppbomjdjg).
 
 Development
 ---
@@ -28,16 +28,13 @@ Development
 
 # Testing
 
-Unit tests:
+Run unit tests:
 
 ```
-grunt karma
+grunt test
 ```
 
 Manual "integration" testing:
 
-```
-grunt connect
-```
-Open localhost:9000/codemirror.html and localhost:9000/ace.html with the development version of the extension loaded to make sure everything is playing nice.
+Run ``grunt connect`` then open localhost:9000/codemirror.html and localhost:9000/ace.html with the development version of the extension loaded to make sure everything is playing nice.
 
