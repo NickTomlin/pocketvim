@@ -1,6 +1,6 @@
 {
     "name": "Pocket Vim",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "manifest_version": 2,
     "description": "Enable bindings on on sites like Github Gists, JS Bin, CodePen and more.",
     "default_locale": "en",
