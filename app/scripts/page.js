@@ -94,7 +94,14 @@ Editors.Ace = function (){
 Editors.Ace.prototype = new Editor();
 
 Editors.Ace.prototype.getDependencies = function () {
-  return ['scripts/keybindings/ace/keybinding-vim.js','scripts/modules/ace/embed.js'];
+  var dependencies = ['scripts/modules/ace/embed.js'];
+  // ace 1.1.1 includes keybindings by default
+  // we only include it manually if there is no binding on the page
+  if (!this.options.binding) {
+    dependencies.unshift('scripts/keybindings/ace/keybinding-vim.js');
+  }
+
+  return dependencies;
 };
 
 /* ==========================================================================
@@ -132,6 +139,7 @@ chrome.extension.sendMessage({method: "isEnabled", url: currentDomain }, functio
 
 // interact with our injected script
 attachListener = function () {
+  // @todo remove listener if domspy returns a falsy value
   window.addEventListener("message", function(event) {
       // We only accept messages from ourselves
       if (event.source != window)
