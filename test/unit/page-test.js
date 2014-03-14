@@ -3,13 +3,18 @@ define(['modules/page', 'test/unit/support/mockchrome'], function (page, mockChr
     var fixture, popup, popupPageHTML;
 
     describe('#initialization', function () {
-      it('listens on window, and respons to page events', function () {
+      it('sends chrome message on initialization with url of current page', function () {
         var url = window.location.href;
         spyOn(mockChrome.extension, 'sendMessage');
 
         page.initialize(mockChrome);
 
-        expect(mockChrome.extension.sendMessage).toHaveBeenCalledWith({method: 'isEnabled', url: url}, function (){});
+        var call = mockChrome.extension.sendMessage.mostRecentCall.args[0];
+
+        expect(call).toEqual(jasmine.objectContaining({
+          method: 'isEnabled',
+          url: url
+        }));
       });
     });
   });
