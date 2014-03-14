@@ -1,28 +1,24 @@
-var PocketVim = PocketVim || {};
-(function (window) {
-    var domSpy = PocketVim.domSpy = {};
+(function (global) {
+  var editor;
+  var domSpy = {};
 
-    var editors = {
-        "CodeMirror": {
-            "selector": ".CodeMirror"
-        },
-        "Ace": {
-            "selector": ".ace_editor"
-        }
-    };
+  domSpy.cm = global.hasOwnProperty("CodeMirror") ? "CodeMirror" : undefined;
+  domSpy.ace = global.hasOwnProperty("ace") ? "Ace" : undefined;
 
-    // @todo this can probably be expressed in a cleaner way
-    domSpy.cm = window.CodeMirror ? "CodeMirror" : undefined;
-    domSpy.ace = window.ace ? "Ace" : undefined;
-    var name = domSpy.cm || domSpy.ace;
+  editor = {
+    name: domSpy.cm || domSpy.ace,
+    options: {}
+  };
 
-    var editor = PocketVim.editor = {
-      name: name,
-      selector: editors[name].selector,
-      options: {
-        version: window.CodeMirror && window.CodeMirror.version || false
-      }
-    };
+  if (domSpy.ace) {
+    editor.options.binding = ace.require("ace/keyboard/vim");
+  } else if (domSpy.cm) {
+    editor.options.version = global.CodeMirror && global.CodeMirror.version || false;
+  }
 
-    window.postMessage({type: "DOMSPY", editorName: editor.name, editorOptions: JSON.stringify(editor.options) }, "*");
-}(window));
+  global.postMessage({
+    type: "POCKETVIM.domspy",
+    editorName: editor.name,
+    editorOptions: editor.options
+  }, "/");
+}(this));
