@@ -3,8 +3,9 @@ PocketVim
 
 A Chrome Extension that allows you to use Vim bindings in Codemirorr and Ace enabled textareas. Works on [Codepen](http://codepen.io), [jsFiddle](http://jsfiddle.net/), [GitHub Gists](http://gist.github.com/), and more!
 
-Installing
+Installation
 ---
+
 Install on the [Chrome web store](https://chrome.google.com/webstore/detail/pocket-vim/pjnhffdkdckcagdmfmidafhppbomjdjg).
 
 Development
