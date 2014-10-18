@@ -5,6 +5,7 @@ define(function (require, exports, module) {
   /**
   * Provide an "orderly" load of dependencies
   * @param  {array} sources array of extension root relative js files
+  * @param  {function} callback to be invoked after all sources are loaded
   * @param  {int} current current member of source arary (internal use only)
   */
 
