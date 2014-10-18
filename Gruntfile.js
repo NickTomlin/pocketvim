@@ -259,11 +259,6 @@ module.exports = function (grunt) {
            "src": "app/",
            "dest": "package/"
           }
-        },
-        karma: {
-          unit: {
-            configFile: 'karma.conf.js',
-          }
         }
     });
 
@@ -273,7 +268,6 @@ module.exports = function (grunt) {
       'crx'
     ]);
 
-    grunt.registerTask('test', ['karma']);
     grunt.registerTask('integration', ['connect:test']);
 
     grunt.registerTask('build', [
@@ -287,9 +281,5 @@ module.exports = function (grunt) {
         'copy',
         'usemin',
         'compress'
-    ]);
-
-    grunt.registerTask('default', [
-        'test',
     ]);
 };

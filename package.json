@@ -1,6 +1,10 @@
 {
   "name": "pocketvim",
   "version": "0.0.0",
+  "scripts": {
+    "test": "karma start karma.conf.js",
+    "test:watch": "karma start karma.conf.js --no-single-run --auto-watch"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
