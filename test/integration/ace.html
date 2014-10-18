@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title></title>
   <style>
-    #editor {
+    .editor {
         position: absolute;
         width: 500px;
         height: 400px;
@@ -12,10 +12,22 @@
   </style>
 </head>
 <body>
-  <div id="editor">foo</div>
+  <div class="editor" id="init">function helloWorld () {}</div>
+  <button>Add an editor</button>
 </body>
 <script src="ace-1.1.01.js"></script>
 <script type="text/javascript" charset="utf-8">
-  var editor = ace.edit("editor");
+  var editors = [];
+  var editor = ace.edit('init');
+
+  var button = document.querySelector('button');
+
+  button.addEventListener('click', function () {
+    var newEditor = document.createElement('div');
+    newEditor.classList.add('editor');
+    document.body.appendChild(newEditor);
+    ace.edit(newEditor);
+    editors.push(newEditor);
+  });
 </script>
 </html>
