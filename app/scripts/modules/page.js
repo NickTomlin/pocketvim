@@ -1,7 +1,7 @@
 'use strict';
 
 define(function (require, exports, module) {
-  var attachPageListener, initialize, editorName;
+  var attachPageListener, handleMessage, initialize, editorName;
   var CHANNEL = 'POCKETVIM';
   var injectScript = require('./inject-script');
   var load = require('./load');
@@ -45,23 +45,26 @@ define(function (require, exports, module) {
     }
   };
 
-  /**
-   * Add listeners to window to interact with injected script;
-   */
-  attachPageListener = module.exports._attachPageListener = function () {
-    window.addEventListener("message", function(event) {
+  handleMessage = module.exports._handleMessage = function (event) {
       var namespace;
+      // other things send postMessages, so make sure that we are
+      // only getting messages of the type that we want
+      var isValidEvent = event.data.type && event.data.type.match(CHANNEL);
 
-      // We only accept messages from ourselves
-      // each message type should be namespaced. E.g. POCKETVIM.domspy
-      if (event.source != window && event.data.type.match(CHANNEL)) { return; }
+      if (!isValidEvent) { return; }
 
-      namespace = event.data.type.split('.')[1];
+      namespace = event.data.type.split('.').slice(1);
 
       if (pageHandlers[namespace]) {
         pageHandlers[namespace](event);
       }
-    }, false);
+  };
+
+  /**
+   * Add listeners to window to interact with injected script;
+   */
+  attachPageListener = module.exports._attachPageListener = function () {
+    window.addEventListener("message", handleMessage);
   };
 
   /**
