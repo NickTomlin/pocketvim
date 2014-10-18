@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>CodeMirror</title>
-  <link rel="stylesheet" href="codemirror/lib/codemirror.css"></link>
+  <link rel="stylesheet" href="./codemirror.css"></link>
+  <style>
+    .CodeMirror {
+      border: 1px solid gray;
+      border-radius: 1px;
+    }
+  </style>
 </head>
 <body>
 <div>
   <textarea id="editor">foo</textarea>
 </div>
 </body>
-<script src="codemirror/lib/codemirror.js"></script>
+<script src="./codemirror.js"></script>
 <script>
 var editor = document.getElementById('editor');
 CodeMirror.fromTextArea(editor)
