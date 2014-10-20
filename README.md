@@ -32,7 +32,7 @@ Development
 Run unit tests:
 
 ```
-grunt test
+npm test
 ```
 
 Manual "integration" testing:
