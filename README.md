@@ -37,5 +37,5 @@ grunt test
 
 Manual "integration" testing:
 
-Run ``grunt connect`` then open localhost:9000/codemirror.html and localhost:9000/ace.html with the development version of the extension loaded to make sure everything is playing nice.
+Run ``npm run serve`` then open [localhost:9000/codemirror.html](http://localhost:9000/codemirror.html) and [localhost:9000/ace.html](http://localhost:9000/ace.html) with the development version of the extension loaded to make sure everything is playing nice.
 

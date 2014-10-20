@@ -1,7 +1,4 @@
 'use strict';
-var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
-};
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -30,24 +27,6 @@ module.exports = function (grunt) {
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
-            }
-        },
-        connect: {
-            options: {
-                port: 9000,
-                // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
-            },
-            test: {
-                options: {
-                    base: 'test/integration',
-                    middleware: function (connect, options, middlewares) {
-                        middlewares.push(mountFolder(connect, 'bower_components'));
-
-                        return middlewares;
-                    },
-                    keepalive: true
-                }
             }
         },
         clean: {
@@ -267,8 +246,6 @@ module.exports = function (grunt) {
       'build',
       'crx'
     ]);
-
-    grunt.registerTask('integration', ['connect:test']);
 
     grunt.registerTask('build', [
         'clean:dist',
