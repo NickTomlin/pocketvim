@@ -24,8 +24,8 @@
   };
 
   handlers.activate = function (event) {
-    if (editors[event.data.editorName]) {
-      editorName = event.data.editorName;
+    editorName = editorName || event.data.editorName;
+    if (editorName) {
       var instances = document.querySelectorAll(editors[editorName].selector);
       Array.prototype.forEach.call(instances, editors[editorName].activate);
     }
@@ -33,8 +33,9 @@
 
   function handleMessage (event) {
     var namespace;
+    var isValidEvent = event.data.type && event.data.type.match(CHANNEL);
 
-    if (event.source != global && event.data.type.match(CHANNEL)) { return; }
+    if (!isValidEvent) { return; }
 
     namespace = event.data.type.split('.')[1];
 

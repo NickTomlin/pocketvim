@@ -1,7 +1,7 @@
 'use strict';
 
 define(function (require, exports, module){
-  var root, submit;
+  var root, submitButton;
   var options = require('./options');
 
   function Popup (root, global) {
@@ -13,11 +13,17 @@ define(function (require, exports, module){
 
   Popup.prototype.initialize = function (callback) {
     this.input = this.root.querySelector('[name="current_url"]');
-    this.submit = this.root.querySelector('#save');
+    this.submitButton = this.root.querySelector('#save');
+    this.enableButton = this.root.querySelector('#enable');
 
-    this.submit.addEventListener('click',  this.saveOption.bind(this));
+    this.submitButton.addEventListener('click',  this.saveOption.bind(this));
+    this.enableButton.addEventListener('click', this.enable.bind(this));
 
     this.getUrl();
+  };
+
+  Popup.prototype.enable = function () {
+    chrome.extension.sendMessage({method: 'enable'});
   };
 
   Popup.prototype._parseTabUrl = function (url) {

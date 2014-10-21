@@ -1,7 +1,7 @@
 'use strict';
 
 define(function (require, exports, module) {
-  var attachPageListener, handleMessage, initialize, editorName;
+  var attachPageListener, attachExtensionListner, handleMessage, initialize, editorName;
   var CHANNEL = 'POCKETVIM';
   var injectScript = require('./inject-script');
   var load = require('./load');
@@ -11,10 +11,17 @@ define(function (require, exports, module) {
   // handle messages from extension
   var extensionHandlers = module.exports.extensionHandlers = {};
 
+  function activate (editorName) {
+    window.postMessage({
+      type: "POCKETVIM.activate",
+      editorName: editorName
+    }, "/");
+  }
+
   pageHandlers.domspy = function (event) {
     var options, editor, dependencies;
 
-    if (! event.data.editorName) return;
+    if (!event.data.editorName) return;
 
     editorName = event.data.editorName;
     options = event.data.editorOptions;
@@ -25,10 +32,7 @@ define(function (require, exports, module) {
       dependencies = ['/scripts/modules/embed.js'].concat(dependencies);
 
       load(dependencies, function () {
-          window.postMessage({
-            type: "POCKETVIM.activate",
-            editorName: editorName
-          }, "/");
+        activate(editorName);
       });
     }
 
@@ -45,6 +49,9 @@ define(function (require, exports, module) {
     }
   };
 
+  /**
+   * Handle messages from page
+   */
   handleMessage = module.exports._handleMessage = function (event) {
       var namespace;
       // other things send postMessages, so make sure that we are
@@ -68,6 +75,18 @@ define(function (require, exports, module) {
   };
 
   /**
+   * Add listeners for messages from extension
+   * @todo make this rpcish
+   */
+  attachExtensionListner = module.exports._attachExtensionListener = function (api) {
+    api.extension.onMessage.addListener(function(request) {
+      if (request.method === 'activate') {
+        activate();
+      }
+    });
+  };
+
+  /**
    * Checks to see if pocketVim is enabled on current page. If so, activates domspy.
    * @param api {obj} object to call api functions on defaults to chrome. Used for mocking in tests.
    */
@@ -78,6 +97,7 @@ define(function (require, exports, module) {
     api.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
         // we don't want to do anything if the domain is not enabled
         if (!response) { return; }
+        attachExtensionListner(api);
 
         injectScript('scripts/modules/domspy.js', function () {
           attachPageListener();

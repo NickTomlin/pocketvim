@@ -1,12 +1,13 @@
 'use strict';
 
 define(function (require, exports, module) {
-  var isEnabled, handlers, addListener;
+  var isEnabled, enable, handlers, addOnMessageListener, connect, addListener;
   var options = require('modules/options');
+
   /**
-   * Attach chrome onMessage listner. Inspired by vimium event bus.
+   * Attach chrome onMessage listener. Inspired by vimium event bus.
    */
-  module.exports.addOnMessageListener = function () {
+  addOnMessageListener = module.exports.addOnMessageListener = function () {
     chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
       if (handlers[request.method]) {
         sendResponse(handlers[request.method](request));
@@ -32,9 +33,16 @@ define(function (require, exports, module) {
     });
   };
 
+  enable = module.exports.enable = function () {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {method: "activate"});
+    });
+  };
+
   // register handlers
   handlers = {
     isEnabled: isEnabled,
+    enable: enable
   };
 
   // set defaults (hopefully only once ;)
@@ -42,4 +50,8 @@ define(function (require, exports, module) {
     options.restoreDefaultOptions();
     localStorage.initialized = true;
   }
+
+  module.exports.initialize = function () {
+    addOnMessageListener();
+  };
 });
