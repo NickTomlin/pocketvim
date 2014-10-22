@@ -12,7 +12,7 @@ define(['modules/page', 'test/unit/support/mockchrome'], function (page, mockChr
         var call = mockChrome.extension.sendMessage.mostRecentCall.args[0];
 
         expect(call).toEqual(jasmine.objectContaining({
-          method: 'isEnabled',
+          channel: 'isEnabled',
           url: url
         }));
       });

@@ -37,16 +37,20 @@ define(function (require, exports, module) {
     }
   };
 
-  Messenger.prototype.handleExtensionMessage = function (message) {
-    this.publish(message);
+  Messenger.prototype.handleExtensionMessage = function (request, sender, sendResponse) {
+    this.publish(request, sender, sendResponse);
   };
 
   Messenger.prototype.publish = function (data) {
+    // store args for later reusue in handler
+    // postMessage does not care about these
+    // but chrome listeners do
+    var handleArgs = arguments;
     var channel = data.channel;
 
     if (channel in this.handlers) {
       this.handlers[channel].forEach(function (handler) {
-        handler(data);
+        handler.apply(null, handleArgs);
       });
     }
   };
