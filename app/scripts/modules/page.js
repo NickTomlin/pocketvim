@@ -6,6 +6,7 @@ define(function (require, exports, module) {
   var injectScript = require('./inject-script');
   var load = require('./load');
   var editors = require('./editors');
+  var Messenger = require('./messenger');
   // handle messages from page
   var pageHandlers = module.exports.pageHandlers = {};
   // handle messages from extension
@@ -18,13 +19,13 @@ define(function (require, exports, module) {
     }, "/");
   }
 
-  pageHandlers.domspy = function (event) {
+  pageHandlers.domspy = function (data) {
     var options, editor, dependencies;
 
-    if (!event.data.editorName) return;
+    if (!data.editorName) return;
 
-    editorName = event.data.editorName;
-    options = event.data.editorOptions;
+    editorName = data.editorName;
+    options = data.editorOptions;
 
     dependencies = editors[editorName](options);
 
@@ -71,7 +72,9 @@ define(function (require, exports, module) {
    * Add listeners to window to interact with injected script;
    */
   attachPageListener = module.exports._attachPageListener = function () {
-    window.addEventListener("message", handleMessage);
+    var windowMessenger = new Messenger(CHANNEL);
+
+    windowMessenger.register('domspy', pageHandlers.domspy);
   };
 
   /**
@@ -79,11 +82,9 @@ define(function (require, exports, module) {
    * @todo make this rpcish
    */
   attachExtensionListner = module.exports._attachExtensionListener = function (api) {
-    api.extension.onMessage.addListener(function(request) {
-      if (request.method === 'activate') {
-        activate();
-      }
-    });
+    var chromeMessenger = new Messenger(CHANNEL, {type: 'chrome'});
+
+    chromeMessenger.register('activate',  activate);
   };
 
   /**
@@ -97,6 +98,7 @@ define(function (require, exports, module) {
     api.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
         // we don't want to do anything if the domain is not enabled
         if (!response) { return; }
+
         attachExtensionListner(api);
 
         injectScript('scripts/modules/domspy.js', function () {

@@ -35,7 +35,7 @@ define(function (require, exports, module) {
 
   enable = module.exports.enable = function () {
     chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {method: "activate"});
+      chrome.tabs.sendMessage(tabs[0].id, {channel: "activate"});
     });
   };
 
