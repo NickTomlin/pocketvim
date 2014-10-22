@@ -22,7 +22,8 @@ define(['modules/page', 'test/unit/support/mockchrome'], function (page, mockChr
       it('it responds to events that have a type that corresponds to the pocket vim channel', function () {
         var validEvent = {
           data: {
-            type: 'POCKETVIM.domspy'
+            namespace: 'POCKETVIM',
+            channel: 'domspy'
           }
         };
 

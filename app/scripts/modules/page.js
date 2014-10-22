@@ -56,14 +56,14 @@ define(function (require, exports, module) {
       var namespace;
       // other things send postMessages, so make sure that we are
       // only getting messages of the type that we want
-      var isValidEvent = event.data.type && event.data.type.match(CHANNEL);
+      // TODO: switch to rpcish
+      var isValidEvent = (event.data && event.data.namespace === 'POCKETVIM');
 
       if (!isValidEvent) { return; }
+      var channel = event.data.channel;
 
-      namespace = event.data.type.split('.').slice(1);
-
-      if (pageHandlers[namespace]) {
-        pageHandlers[namespace](event);
+      if (pageHandlers[channel]) {
+        pageHandlers[channel](event);
       }
   };
 
