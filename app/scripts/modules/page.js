@@ -95,7 +95,7 @@ define(function (require, exports, module) {
     api = api || chrome;
     var currentDomain = window.location.origin + window.location.pathname;
 
-    api.extension.sendMessage({method: "isEnabled", url: currentDomain }, function(response) {
+    api.extension.sendMessage({channel: "isEnabled", url: currentDomain }, function(response) {
         // we don't want to do anything if the domain is not enabled
         if (!response) { return; }
 

@@ -1,19 +1,22 @@
 'use strict';
 
 define(function (require, exports, module) {
-  var isEnabled, enable, handlers, addOnMessageListener, connect, addListener;
+  var isEnabled, enable, handlers, attachListeners, connect, addListener;
+  var CHANNEL = 'POCKETVIM';
   var options = require('modules/options');
+  var Messenger = require('modules/messenger');
 
   /**
    * Attach chrome onMessage listener. Inspired by vimium event bus.
    */
-  addOnMessageListener = module.exports.addOnMessageListener = function () {
-    chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
-      if (handlers[request.method]) {
-        sendResponse(handlers[request.method](request));
-      }
-      return false;
+  attachListeners = module.exports.attachListeners = function () {
+    var chromeMessenger = new Messenger(CHANNEL, {type: 'chrome'});
+
+    chromeMessenger.register('isEnabled', function (request, sender, sendResponse) {
+      sendResponse(isEnabled(request));
     });
+
+    chromeMessenger.register('enable', enable);
   };
 
   /**
@@ -39,12 +42,7 @@ define(function (require, exports, module) {
     });
   };
 
-  // register handlers
-  handlers = {
-    isEnabled: isEnabled,
-    enable: enable
-  };
-
+  // TODO: use chrome storage api
   // set defaults (hopefully only once ;)
   if (! localStorage.initialized) {
     options.restoreDefaultOptions();
@@ -52,6 +50,6 @@ define(function (require, exports, module) {
   }
 
   module.exports.initialize = function () {
-    addOnMessageListener();
+    attachListeners();
   };
 });

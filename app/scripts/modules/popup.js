@@ -23,7 +23,7 @@ define(function (require, exports, module){
   };
 
   Popup.prototype.enable = function () {
-    chrome.extension.sendMessage({method: 'enable'});
+    chrome.extension.sendMessage({channel: 'enable'});
   };
 
   Popup.prototype._parseTabUrl = function (url) {
