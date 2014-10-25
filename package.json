@@ -2,9 +2,10 @@
   "name": "pocketvim",
   "version": "0.1.1",
   "scripts": {
+    "start": "npm run serve",
     "test": "karma start karma.conf.js",
     "test:watch": "karma start karma.conf.js --no-single-run --auto-watch",
-    "serve": "http-server -p 9000 test/integration -o"
+    "serve": "http-server -p 9999 test/integration -o"
   },
   "dependencies": {},
   "devDependencies": {
