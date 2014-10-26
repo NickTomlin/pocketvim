@@ -9,7 +9,7 @@ define(['modules/page', 'test/unit/support/mockchrome'], function (page, mockChr
 
         page.initialize(mockChrome);
 
-        var call = mockChrome.extension.sendMessage.mostRecentCall.args[0];
+        var call = mockChrome.extension.sendMessage.calls.mostRecent().args[0];
 
         expect(call).toEqual(jasmine.objectContaining({
           channel: 'isEnabled',
