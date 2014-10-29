@@ -13,7 +13,7 @@ module.exports = function(config) {
       // application
       {pattern: 'app/scripts/modules/*.js', included: false},
       {pattern: 'app/scripts/*.js', included: false},
-      'app/html/*.html',
+      // 'app/html/*.html',
       // testing
       {pattern: 'test/unit/*-test.js', included: false},
       'test/unit/support/*.html',
@@ -55,7 +55,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     browsers: ['Chrome'],
