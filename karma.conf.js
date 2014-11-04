@@ -7,20 +7,25 @@ module.exports = function(config) {
     basePath: '',
 
     // frameworks to use
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['requirejs', 'mocha'],
 
     files: [
       // application
       {pattern: 'app/scripts/modules/*.js', included: false},
       {pattern: 'app/scripts/*.js', included: false},
-      // 'app/html/*.html',
-      // testing
+      {pattern: 'app/html/*.html', included: false},
+      // test files
       {pattern: 'test/unit/*-test.js', included: false},
-      'test/unit/support/*.html',
       {pattern: 'test/unit/support/*.js', included: false},
       'bower_components/codemirror/lib/*',
+
+      // test utilities
+      {pattern: 'node_modules/sinon/lib/**/*.js', included: false},
+      {pattern: 'node_modules/chai/chai.js', included: false},
+      {pattern: 'node_modules/text/text.js', included: false},
+
       // requirejs bootstrap for testing
-      'test/unit/test-helper.js'
+      'test/unit/test-helper.js',
     ],
 
     // list of files to exclude
@@ -29,15 +34,10 @@ module.exports = function(config) {
       'app/scripts/requireContent.js'
     ],
 
-    preprocesors : {
-      '**/*.html': 'html2js'
-    },
-
     plugins: [
-      'karma-jasmine',
+      'karma-mocha',
       'karma-requirejs',
-      'karma-chrome-launcher',
-      'karma-html2js-preprocessor'
+      'karma-chrome-launcher'
     ],
 
     // test results reporter to use

@@ -1,5 +1,5 @@
 var allTestFiles = [];
-var TEST_REGEXP = /test\.js$/;
+var TEST_REGEXP = /-test\.js$/;
 
 var pathToModule = function(path) {
   return path.replace(/^\/base\//, '').replace(/\.js$/, '');
@@ -12,18 +12,28 @@ Object.keys(window.__karma__.files).forEach(function(file) {
   }
 });
 
+// console.log(allTestFiles);
+
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
   baseUrl: '/base',
 
+  packages: [
+    { name: 'sinon', location: 'node_modules/sinon', main: 'lib/sinon' }
+  ],
+
   paths: {
     // make module inclusion slightly less verbose
-    'modules': 'app/scripts/modules'
+    'modules': 'app/scripts/modules',
+    'chai': 'node_modules/chai/chai',
+    'text': 'node_modules/text/text'
   },
 
   // dynamically load all test files
   deps: allTestFiles,
 
   // we have to kickoff jasmine, as it is asynchronous
-  callback: window.__karma__.start
+  callback: function () {
+   window.__karma__.start();
+  }
 });

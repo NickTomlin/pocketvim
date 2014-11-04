@@ -1,4 +1,6 @@
-define(['modules/messenger'], function (Messenger) {
+define(['sinon', 'chai', 'modules/messenger'], function (sinon, chai, Messenger) {
+  var expect = chai.expect;
+
   describe('messenger', function () {
     var channel, namespace, data, messenger;
 
@@ -24,14 +26,14 @@ define(['modules/messenger'], function (Messenger) {
         returnedData = messageData;
       });
 
-      expect(messenger.handlers[channel]).toBeDefined();
+      expect(messenger.handlers[channel]).to.be.ok;
     });
 
     it('dispatches event registered to namespace', function (done) {
       messenger = new Messenger(namespace, {type: 'message'});
 
       messenger.register(channel, function (messageData) {
-        expect(messageData).toEqual(data);
+        expect(messageData).to.eql(data);
         done();
       });
 
@@ -39,7 +41,7 @@ define(['modules/messenger'], function (Messenger) {
     });
 
     it('does not dispatch events that are not on namespace', function (done) {
-      var callback = jasmine.createSpy();
+      var callback = sinon.spy();
 
       var messenger = new Messenger('OTHER_NAMESPACE', {type: 'message'});
       messenger.register(channel, callback);
@@ -47,7 +49,7 @@ define(['modules/messenger'], function (Messenger) {
       window.postMessage(data, '*');
 
       setTimeout(function () {
-        expect(callback).not.toHaveBeenCalled();
+        expect(callback.called).to.be.false
         done();
       }, 10);
     });
@@ -55,7 +57,7 @@ define(['modules/messenger'], function (Messenger) {
     it('throws an exception when invoked without a namespace', function () {
       expect(function () {
         var broken = new Messenger();
-      }).toThrow();
+      }).to.throw();
     });
   });
 });
