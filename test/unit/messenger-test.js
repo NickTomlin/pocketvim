@@ -1,9 +1,13 @@
-define(['modules/messenger'], function (Messenger) {
+define(['sinon', 'chai', 'modules/messenger'], function (sinon, chai, Messenger) {
+  var expect = chai.expect;
+
   describe('messenger', function () {
-    var channel, data;
+    var channel, namespace, data, messenger;
 
     beforeEach(function () {
+      namespace = 'POCKETVIM';
       channel = 'foo';
+
       data = {
         namespace: 'POCKETVIM',
         channel: channel,
@@ -11,21 +15,25 @@ define(['modules/messenger'], function (Messenger) {
       };
     });
 
+    afterEach(function () {
+      messenger = null;
+    });
+
     it('allows consumers to register handlers', function () {
-      var messenger = new Messenger(data.channel, {type: 'message'});
+      messenger = new Messenger(namespace, {type: 'message'});
 
       messenger.register(channel, function (messageData) {
         returnedData = messageData;
       });
 
-      expect(messenger.handlers[channel]).toBeDefined();
+      expect(messenger.handlers[channel]).to.be.ok;
     });
 
     it('dispatches event registered to namespace', function (done) {
-      var messenger = new Messenger(data.channel, {type: 'message'});
+      messenger = new Messenger(namespace, {type: 'message'});
 
       messenger.register(channel, function (messageData) {
-        expect(messageData).toEqual(data);
+        expect(messageData).to.eql(data);
         done();
       });
 
@@ -33,16 +41,15 @@ define(['modules/messenger'], function (Messenger) {
     });
 
     it('does not dispatch events that are not on namespace', function (done) {
-      var callback = jasmine.createSpy();
-      data.namespace = 'OTHER';
+      var callback = sinon.spy();
 
-      var messenger = new Messenger(data.channel, {type: 'message'});
+      var messenger = new Messenger('OTHER_NAMESPACE', {type: 'message'});
       messenger.register(channel, callback);
 
       window.postMessage(data, '*');
 
       setTimeout(function () {
-        expect(callback).not.toHaveBeenCalled();
+        expect(callback.called).to.be.false
         done();
       }, 10);
     });
@@ -50,7 +57,7 @@ define(['modules/messenger'], function (Messenger) {
     it('throws an exception when invoked without a namespace', function () {
       expect(function () {
         var broken = new Messenger();
-      }).toThrow();
+      }).to.throw();
     });
   });
 });
