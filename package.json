@@ -5,11 +5,13 @@
     "start": "npm run serve",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "test:watch": "./node_modules/karma/bin/karma  start karma.conf.js --no-single-run --auto-watch",
+    "test:integration": "./node_modules/.bin/mocha  test/integration/page-test.js",
     "serve": "http-server -p 9999 test/integration -o"
   },
   "dependencies": {},
   "devDependencies": {
     "chai": "^1.9.2",
+    "chromedriver": "^2.10.0-1",
     "grunt": "~0.4.1",
     "grunt-chrome-manifest": "~0.1.0",
     "grunt-concurrent": "~0.3.0",
@@ -38,6 +40,7 @@
     "load-grunt-tasks": "~0.1.0",
     "mocha": "^2.0.1",
     "requirejs": "~2.1.11",
+    "selenium-webdriver": "^2.44.0",
     "sinon": "1.10.3",
     "text": "git://github.com/requirejs/text",
     "time-grunt": "~0.1.1"
