@@ -3,6 +3,7 @@
     "version": "0.1.1",
     "manifest_version": 2,
     "description": "Enable bindings on on sites like Github Gists, JS Bin, CodePen and more.",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqXFeYWz5p3zyJrRdhHEhJImdrJ0+cV6Xd1bjs+tSjlQSF1zYRMoTN1uiZ7W3+OwUtjuMqITzg4J3F2y6cz4rsBxp//ohbJyeZrjF268EQ/rubRRiSHlZ9L5nujknGlKhDjmJfb4C+hP9ux1ydSTKuIfP5JLIvHxMeXfrH94WDIwvsf6VjdZz9Wj1BaOHN9aF2kjK3zPedU9FEVxWt+oRGOSWAa2vROMCkt5B5GafmNYIfVAG6sFJ3xJx1skm7Etq4NBcH5E41QhWddLsE1dnQtPBo/8/SeHRJdlUTHjv0SEeF0GWlfhkXVhtdNSJACTj0p7rzO+vSwCqHXx6XwJDdQIDAQAB",
     "default_locale": "en",
     "icons": {
         "64": "images/icon.png"

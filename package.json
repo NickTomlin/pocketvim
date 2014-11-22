@@ -3,9 +3,10 @@
   "version": "0.1.1",
   "scripts": {
     "start": "npm run serve",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "test:watch": "./node_modules/karma/bin/karma  start karma.conf.js --no-single-run --auto-watch",
-    "test:integration": "./node_modules/.bin/mocha  test/integration/page-test.js",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "./node_modules/karma/bin/karma start karma.conf.js",
+    "test:unit:watch": "./node_modules/karma/bin/karma  start karma.conf.js --no-single-run --auto-watch",
+    "test:integration": "mocha test/integration/page-test.js",
     "serve": "http-server -p 9999 test/integration -o"
   },
   "dependencies": {},
