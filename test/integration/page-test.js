@@ -10,8 +10,11 @@ t.describe('PocketVim', function () {
     setOptions(driver, done);
   });
 
-  after(function () {
-    driver.quit();
+  after(function (done) {
+    driver.sleep(1000);
+    driver.quit().then(function () {
+      done();
+    });
   });
 
   t.describe('options', function () {
@@ -82,10 +85,7 @@ t.describe('PocketVim', function () {
       var phrase = 'Vim is cool';
       var action = new wd.ActionSequence(driver);
 
-      driver.findElement({className: 'ace_editor'}).then(function (element) {
-        console.log('element');
-        return element;
-      })
+      driver.findElement({className: 'ace_editor'})
       .then(function (element) {
        var a =  action
           .click(element)
