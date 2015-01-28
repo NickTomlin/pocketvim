@@ -20,7 +20,7 @@ t.describe('PocketVim', function () {
   t.describe('options', function () {
     beforeEach(function () {
       driver.get(EXTENSION_URL + '/html/options.html');
-    })
+    });
 
     t.it('resets options to default', function (done) {
       var addOption = new wd.ActionSequence(driver)
@@ -50,7 +50,7 @@ t.describe('PocketVim', function () {
 
   t.describe('CodeMirror', function () {
     beforeEach(function () {
-      driver.get('http://localhost:9999/codemirror.html');
+      driver.get('http://localhost:9999/support/codemirror.html');
     });
 
     t.it('activates vim bindings', function (done) {
@@ -78,7 +78,7 @@ t.describe('PocketVim', function () {
 
   t.describe('Ace', function () {
     beforeEach(function () {
-      driver.get('http://localhost:9999/ace.html');
+      driver.get('http://localhost:9999/support/ace.html');
     });
 
     t.it('activates vim bindings', function (done) {
