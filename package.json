@@ -6,7 +6,7 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "./node_modules/karma/bin/karma start karma.conf.js",
     "test:unit:watch": "./node_modules/karma/bin/karma  start karma.conf.js --no-single-run --auto-watch",
-    "test:integration": "mocha test/integration/page-test.js",
+    "test:integration": "webdriver-manager update --chrome && protractor",
     "serve": "http-server -p 9999 test/integration -o"
   },
   "dependencies": {},
@@ -40,8 +40,8 @@
     "karma-requirejs": "^0.2.2",
     "load-grunt-tasks": "~0.1.0",
     "mocha": "^2.0.1",
+    "protractor": "^3.0.0",
     "requirejs": "~2.1.11",
-    "selenium-webdriver": "^2.44.0",
     "sinon": "1.10.3",
     "text": "git://github.com/requirejs/text",
     "time-grunt": "~0.1.1"
