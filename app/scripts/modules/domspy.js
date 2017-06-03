@@ -1,5 +1,5 @@
 (function (global) {
-  var editor;
+  var editor, acequire;
   var domSpy = {};
 
   domSpy.cm = global.hasOwnProperty("CodeMirror") ? "CodeMirror" : undefined;
@@ -11,7 +11,8 @@
   };
 
   if (domSpy.ace) {
-    editor.options.binding = ace.require("ace/keyboard/vim");
+    acequire = ace.acequire ? ace.acequire : ace.require;
+    editor.options.binding = acequire("ace/keyboard/vim");
   } else if (domSpy.cm) {
     editor.options.version = global.CodeMirror && global.CodeMirror.version || false;
   }
