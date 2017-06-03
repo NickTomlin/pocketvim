@@ -3,7 +3,7 @@ PocketVim [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http:
 
 > This project is not actively maintained. If it works for you, great! If not, I probably will not get around to fixing it.
 
-A Chrome Extension that allows you to use Vim bindings in Codemirorr and Ace enabled textareas. Works on [Codepen](http://codepen.io), [jsFiddle](http://jsfiddle.net/), [GitHub Gists](http://gist.github.com/), and more!
+A Chrome Extension that allows you to use Vim bindings in Codemirorr and Ace enabled textareas. Works on [Codepen](http://codepen.io), [jsFiddle](http://jsfiddle.net/), ~[GitHub Gists](http://gist.github.com/)~ (currently broken! woo hoo :\), and more!
 
 Installation
 ---
