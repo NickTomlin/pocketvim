@@ -13,13 +13,14 @@ Hacking
 Loading Dependencies:
 
 - clone this repo
-- ``npm install``
-- ``bower install``
-
+- ensure you are running an _oooold_ version of node (0.10 or 0.12)
+- `npm install`
+- `gem install compass`
+  - this assumes you have ruby installed (sorry, I wrote back in the day this before node-sass was popular -- I was young)
 
 Viewing your changes:
 
-- ``grunt build``
+- `grunt build`
 - In chrome:
   - open your chrome "extensions tab"
   - check the "developer mode" checkbox
